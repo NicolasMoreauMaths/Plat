@@ -163,6 +163,8 @@
   .p2-title{font-family:'Cinzel',serif;font-size:9px;font-weight:700;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-bottom:7px;padding-bottom:5px;border-bottom:1px solid var(--gold-mid);}
   .p2-block p{font-size:13.5px;color:var(--ink-mid);margin-bottom:4px;font-family:'Lato',sans-serif;line-height:1.55;}
   .p2-block strong{color:var(--ink);font-weight:700;}
+  #menu-toggle{ display:none; }
+
   #sidebar::-webkit-scrollbar{width:4px;}
   #sidebar::-webkit-scrollbar-thumb{background:rgba(180,130,50,.15);border-radius:2px;}
   ::-webkit-scrollbar{width:6px;}
@@ -193,15 +195,17 @@
       position:fixed; bottom:20px; right:20px;
       width:52px; height:52px;
       background:var(--sidebar-bg);
-      border:2px solid rgba(180,130,50,.4);
+      border:2px solid rgba(180,130,50,.6);
       border-radius:50%;
-      font-size:22px;
+      font-size:26px;
+      color:#f0d890;
       cursor:pointer;
       z-index:300;
-      box-shadow:0 4px 16px rgba(0,0,0,.4);
-      transition:transform .2s;
+      box-shadow:0 4px 16px rgba(0,0,0,.5), 0 0 0 1px rgba(180,130,50,.15);
+      transition:transform .2s, box-shadow .2s;
     }
     #menu-toggle:active{ transform:scale(.93); }
+    #menu-toggle:hover{ box-shadow:0 6px 20px rgba(0,0,0,.6), 0 0 0 1px rgba(180,130,50,.3); }
 
     /* Overlay sombre derrière le menu */
     #menu-overlay{
@@ -265,7 +269,7 @@
 <body>
 
 <div id="menu-overlay" onclick="closeMenu()"></div>
-<button id="menu-toggle" onclick="toggleMenu()" aria-label="Menu">⚜</button>
+<button id="menu-toggle" onclick="toggleMenu()" aria-label="Menu">☰</button>
 
 <aside id="sidebar">
   <div id="sidebar-header">
