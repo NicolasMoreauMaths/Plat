@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kingdom Come: Deliverance — Guide Platine</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚜</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parch:#f2e8d5; --parch2:#ede0c4; --parch3:#e4d4ae;
+    --sidebar-bg:#1a1208; --border:#c8b48a; --border-dark:#a8946a;
+    --gold:#8a5e14; --gold-light:#b87d1a; --gold-pale:#f5e8c8; --gold-mid:#dcc88a; --gold-glow:#c9902a;
+    --red:#7a1a0a; --red-bg:#faf0ec; --red-border:#c0705a;
+    --orange:#8a4a08; --orange-bg:#faf4ec; --orange-border:#c09050;
+    --green:#2a5a1a; --green-bg:#eef5ea; --green-border:#7aaa5a;
+    --blue:#1a3a6a; --blue-bg:#eef0f8; --blue-border:#7a9acc;
+    --ink:#1c1208; --ink-mid:#3d2b10; --ink-dim:#7a6040; --ink-faint:#b8a07a;
+    --nav-w:280px; --r:4px;
+    --p1:#5a3a08; --p1bg:#fdf6ea; --p1bd:#c9a040;
+    --p2:#1a3a6a; --p2bg:#eef0f8; --p2bd:#7a9acc;
+    --p3:#7a1a0a; --p3bg:#faf0ec; --p3bd:#c0705a;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--parch);color:var(--ink);font-family:'IM Fell English',Georgia,serif;font-size:17px;line-height:1.75;display:flex;min-height:100vh;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");}
+
+  #sidebar{width:var(--nav-w);height:100vh;background:var(--sidebar-bg);position:fixed;top:0;left:0;overflow-y:auto;overflow-x:hidden;z-index:100;display:flex;flex-direction:column;border-right:2px solid #3a2808;background-image:repeating-linear-gradient(0deg,transparent,transparent 28px,rgba(255,255,255,.015) 28px,rgba(255,255,255,.015) 29px);}
+  #sidebar-header{padding:24px 20px 18px;border-bottom:1px solid rgba(180,130,50,.2);text-align:center;}
+  .s-crest{font-size:28px;margin-bottom:6px;display:block;}
+  .s-eyebrow{font-family:'Cinzel',serif;font-size:8px;font-weight:600;letter-spacing:3px;color:var(--gold-light);text-transform:uppercase;margin-bottom:5px;}
+  #sidebar-header h2{font-family:'Cinzel Decorative',serif;font-size:12px;font-weight:700;color:#f0d890;line-height:1.3;text-shadow:0 1px 4px rgba(0,0,0,.5);}
+  .progress-wrap{padding:14px 20px;border-bottom:1px solid rgba(180,130,50,.15);}
+  .progress-label{font-family:'Cinzel',serif;font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.3);display:flex;justify-content:space-between;margin-bottom:7px;}
+  .progress-label strong{color:var(--gold-light);}
+  .progress-track{height:3px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#5a3a08,var(--gold-glow));border-radius:2px;transition:width .5s cubic-bezier(.4,0,.2,1);}
+  nav{padding:8px 0 0;flex:1;}
+  .nav-group{padding:11px 20px 3px;font-family:'Cinzel',serif;font-size:8px;font-weight:700;letter-spacing:2.5px;color:rgba(180,130,50,.38);text-transform:uppercase;border-top:1px solid rgba(180,130,50,.07);margin-top:3px;}
+  .nav-group.p1{color:rgba(201,160,40,.5);}.nav-group.p2{color:rgba(100,140,200,.5);}.nav-group.p3{color:rgba(200,100,80,.5);}
+  nav a{display:flex;align-items:center;gap:8px;padding:6px 20px;color:rgba(240,215,150,.38);text-decoration:none;font-family:'Lato',sans-serif;font-size:12px;font-weight:400;transition:all .15s;border-left:2px solid transparent;line-height:1.4;}
+  nav a:hover{color:rgba(240,215,150,.82);background:rgba(180,130,50,.06);border-left-color:rgba(180,130,50,.35);}
+  nav a.active{color:#f0d890;background:rgba(180,130,50,.1);border-left-color:var(--gold-glow);font-weight:700;}
+  nav a.done{color:rgba(240,215,150,.18);text-decoration:line-through;text-decoration-color:rgba(180,130,50,.15);}
+  nav a.done .nc{background:rgba(50,140,60,.2);border-color:rgba(50,140,60,.4);}
+  .nc{width:13px;height:13px;border:1px solid rgba(180,130,50,.2);border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#60b870;font-family:'Lato',sans-serif;transition:all .15s;}
+  .m-dot{width:5px;height:5px;border-radius:50%;background:#c05040;flex-shrink:0;margin-left:auto;box-shadow:0 0 5px rgba(192,80,64,.5);}
+  .reset-btn{margin:12px 20px 20px;background:transparent;border:1px solid rgba(180,130,50,.15);color:rgba(240,215,150,.2);padding:7px 12px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1px;cursor:pointer;border-radius:var(--r);transition:all .15s;width:calc(100% - 40px);text-transform:uppercase;}
+  .reset-btn:hover{border-color:#c05040;color:#c05040;}
+
+  #main{margin-left:var(--nav-w);flex:1;max-width:860px;padding:52px 64px 140px;}
+
+  #hero{margin-bottom:56px;padding-bottom:44px;border-bottom:2px solid var(--border);text-align:center;position:relative;}
+  #hero::before{content:'✦  ✦  ✦';display:block;font-size:11px;letter-spacing:8px;color:var(--gold);margin-bottom:18px;opacity:.6;}
+  #hero::after{content:'✦  ✦  ✦';font-size:11px;letter-spacing:8px;color:var(--gold);opacity:.6;position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);background:var(--parch);padding:0 16px;}
+  .eyebrow{font-family:'Cinzel',serif;font-size:10px;font-weight:600;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
+  #hero h1{font-family:'Cinzel Decorative',serif;font-size:32px;font-weight:700;color:var(--ink);line-height:1.2;margin-bottom:6px;text-shadow:1px 1px 0 rgba(255,255,255,.5);}
+  #hero h1 em{font-style:italic;color:var(--gold);font-family:'IM Fell English',serif;font-size:.85em;}
+  .subtitle{font-size:14px;font-family:'Lato',sans-serif;font-weight:300;color:var(--ink-dim);margin-bottom:28px;font-style:italic;}
+  .hero-stats{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+  .stat{background:var(--parch2);border:1px solid var(--border);padding:11px 20px;border-radius:var(--r);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 1px 3px rgba(0,0,0,.07);}
+  .stat-val{font-family:'Cinzel',serif;font-size:22px;font-weight:900;color:var(--gold);display:block;line-height:1;margin-bottom:2px;}
+  .stat-val.red{color:var(--red);}
+  .stat-lbl{font-family:'Lato',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-dim);}
+
+  .section{margin-bottom:68px;scroll-margin-top:24px;}
+  .section-hd{display:flex;align-items:center;gap:16px;margin-bottom:26px;}
+  .section-title{font-family:'Cinzel',serif;font-size:20px;font-weight:900;color:var(--ink);white-space:nowrap;letter-spacing:1px;}
+  .section-rule{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);}
+
+  .phase-block{border-radius:var(--r);margin-bottom:20px;overflow:hidden;border:1px solid;}
+  .phase-header{padding:18px 24px;display:flex;align-items:center;gap:18px;}
+  .phase-latin{font-family:'Cinzel Decorative',serif;font-size:22px;font-weight:700;opacity:.25;flex-shrink:0;line-height:1;}
+  .phase-num{font-family:'Cinzel',serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;opacity:.7;}
+  .phase-title{font-family:'Cinzel',serif;font-size:15px;font-weight:700;line-height:1.3;}
+  .phase-body{padding:0 24px 20px;}
+  .phase-body p{font-size:15.5px;color:var(--ink-mid);margin-bottom:10px;line-height:1.7;}
+  .phase-body strong{color:var(--ink);font-weight:700;}
+  .phase-p1{background:var(--p1bg);border-color:var(--p1bd);}
+  .phase-p1 .phase-header{background:rgba(201,160,40,.08);}
+  .phase-p1 .phase-latin,.phase-p1 .phase-num,.phase-p1 .phase-title{color:var(--p1);}
+  .phase-p2{background:var(--p2bg);border-color:var(--p2bd);}
+  .phase-p2 .phase-header{background:rgba(100,140,200,.07);}
+  .phase-p2 .phase-latin,.phase-p2 .phase-num,.phase-p2 .phase-title{color:var(--p2);}
+  .phase-p3{background:var(--p3bg);border-color:var(--p3bd);}
+  .phase-p3 .phase-header{background:rgba(192,80,64,.07);}
+  .phase-p3 .phase-latin,.phase-p3 .phase-num,.phase-p3 .phase-title{color:var(--p3);}
+
+  .trophy-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+  .pill{font-family:'Lato',sans-serif;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;border:1px solid;letter-spacing:.3px;}
+  .pill-green{background:var(--green-bg);color:var(--green);border-color:var(--green-border);}
+  .pill-orange{background:var(--orange-bg);color:var(--orange);border-color:var(--orange-border);}
+  .pill-gold{background:var(--gold-pale);color:var(--gold);border-color:var(--gold-mid);}
+
+  .cl-table{width:100%;border-collapse:collapse;font-size:14.5px;}
+  .cl-table th{font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faint);padding:8px 14px;text-align:left;border-bottom:2px solid var(--border);font-weight:700;background:var(--parch2);}
+  .cl-row{border-bottom:1px solid var(--parch3);cursor:pointer;transition:background .12s;}
+  .cl-row:hover{background:var(--parch2);}
+  .cl-row.done{opacity:.35;}
+  .cl-row.crit td:nth-child(2){border-left:3px solid var(--red-border);padding-left:11px;}
+  .cl-row td{padding:9px 14px;vertical-align:top;}
+  .cl-box{width:18px;height:18px;border:1.5px solid var(--border-dark);border-radius:2px;display:flex;align-items:center;justify-content:center;color:var(--green);font-size:11px;font-weight:900;font-family:'Lato',sans-serif;margin-top:1px;flex-shrink:0;transition:all .15s;}
+  .cl-row.done .cl-box{background:var(--green-bg);border-color:var(--green-border);}
+  .cl-when{font-family:'Lato',sans-serif;font-size:11px;font-weight:700;color:var(--ink-dim);white-space:nowrap;padding-top:10px !important;letter-spacing:.3px;text-transform:uppercase;}
+  .cl-text{font-size:14.5px;color:var(--ink-mid);line-height:1.55;}
+  .cl-text strong{color:var(--ink);font-weight:700;}
+  .badge-m{display:inline-block;background:var(--red-bg);color:var(--red);border:1px solid var(--red-border);font-size:8.5px;font-family:'Cinzel',serif;font-weight:600;letter-spacing:.8px;padding:1px 6px;border-radius:2px;margin-left:6px;vertical-align:middle;text-transform:uppercase;}
+  .badge-g{display:inline-block;background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);font-size:8.5px;font-family:'Cinzel',serif;font-weight:600;letter-spacing:.8px;padding:1px 6px;border-radius:2px;margin-left:6px;vertical-align:middle;text-transform:uppercase;}
+  .act-divider td{padding:13px 14px 3px !important;font-family:'Cinzel',serif;font-size:8px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;opacity:.7;border-bottom:1px solid var(--parch3);font-weight:700;}
+
+  .trophy-card{background:var(--parch2);border:1px solid var(--border);border-radius:var(--r);margin-bottom:14px;overflow:hidden;scroll-margin-top:24px;transition:box-shadow .2s,border-color .2s;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 1px 3px rgba(0,0,0,.06);}
+  .trophy-card:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 3px 12px rgba(0,0,0,.1);border-color:var(--gold-mid);}
+  .trophy-card.done{opacity:.36;}
+  .trophy-hd{display:flex;align-items:center;cursor:pointer;user-select:none;transition:background .12s;}
+  .trophy-hd:hover{background:var(--parch3);}
+  .t-bar{width:4px;align-self:stretch;flex-shrink:0;}
+  .t-bar.or{background:linear-gradient(180deg,#c9a020,#8a6010);}
+  .t-bar.argent{background:linear-gradient(180deg,#8a9aaa,#5a6a7a);}
+  .t-bar.bronze{background:linear-gradient(180deg,#c08040,#7a4a18);}
+  .t-dot-wrap{padding:12px 13px;flex-shrink:0;}
+  .t-dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  .t-dot.or{background:radial-gradient(circle at 35% 35%,#f0c840,#8a6010);box-shadow:0 0 5px rgba(200,160,32,.4);}
+  .t-dot.argent{background:radial-gradient(circle at 35% 35%,#c0ccd8,#5a6a7a);}
+  .t-dot.bronze{background:radial-gradient(circle at 35% 35%,#d0a060,#7a4a18);}
+  .t-titles{flex:1;padding:12px 0;}
+  .t-name{font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:var(--ink);line-height:1.3;display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+  .badge{font-family:'Cinzel',serif;font-size:8px;font-weight:700;letter-spacing:.8px;padding:2px 7px;border-radius:2px;text-transform:uppercase;}
+  .b-red{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border);}
+  .b-orange{background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-border);}
+  .b-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);}
+  .b-gold{background:var(--gold-pale);color:var(--gold);border:1px solid var(--gold-mid);}
+  .t-sub{font-family:'Lato',sans-serif;font-size:11px;color:var(--ink-dim);margin-top:2px;font-style:italic;}
+  .t-type{padding:12px 14px;font-family:'Cinzel',serif;font-size:10px;font-weight:700;flex-shrink:0;text-transform:uppercase;}
+  .t-type.or{color:var(--gold);}.t-type.argent{color:#5a6a7a;}.t-type.bronze{color:#8a5e14;}
+  .t-check-btn{padding:12px 11px;flex-shrink:0;}
+  .t-check{width:25px;height:25px;border:1.5px solid var(--border-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Lato',sans-serif;font-size:11px;font-weight:900;color:var(--green);transition:all .2s;cursor:pointer;background:transparent;}
+  .done .t-check{background:var(--green-bg);border-color:var(--green-border);}
+  .t-chevron{padding:12px 15px 12px 3px;color:var(--ink-faint);font-size:9px;transition:transform .25s cubic-bezier(.4,0,.2,1);}
+  .trophy-card.open .t-chevron{transform:rotate(180deg);}
+  .trophy-body{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1);border-top:0px solid var(--border);}
+  .trophy-card.open .trophy-body{max-height:3000px;border-top-width:1px;}
+  .tbi{padding:22px 26px 26px;}
+  .tbi h4{font-family:'Cinzel',serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin:22px 0 9px;padding-bottom:5px;border-bottom:1px solid var(--gold-mid);}
+  .tbi h4:first-child{margin-top:0;}
+  .tbi p{font-size:16px;color:var(--ink-mid);margin-bottom:11px;line-height:1.7;}
+  .tbi strong{color:var(--ink);font-weight:700;}
+  .tbi em{font-style:italic;color:var(--ink-mid);}
+  .steps{list-style:none;margin:7px 0 13px;border:1px solid var(--border);border-radius:3px;overflow:hidden;}
+  .steps li{padding:9px 16px 9px 32px;position:relative;color:var(--ink-mid);font-size:15.5px;line-height:1.6;background:var(--parch);border-bottom:1px solid var(--parch3);}
+  .steps li:last-child{border-bottom:none;}
+  .steps li:nth-child(even){background:var(--parch2);}
+  .steps li::before{content:'⚔';position:absolute;left:10px;top:11px;color:var(--gold);font-size:10px;}
+  .steps li strong{color:var(--ink);font-weight:700;}
+  .callout{border-radius:3px;padding:12px 16px;margin:11px 0;font-size:14.5px;font-family:'Lato',sans-serif;line-height:1.65;border-left:3px solid;}
+  .c-danger{background:var(--red-bg);border-color:var(--red-border);color:var(--red);}
+  .c-warn{background:var(--orange-bg);border-color:var(--orange-border);color:var(--orange);}
+  .c-tip{background:var(--green-bg);border-color:var(--green-border);color:var(--green);}
+  .c-info{background:var(--blue-bg);border-color:var(--blue-border);color:var(--blue);}
+  .callout strong{font-weight:700;}
+  .p2-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0;}
+  .p2-block{background:var(--parch);border:1px solid var(--border);border-radius:3px;padding:12px 14px;}
+  .p2-title{font-family:'Cinzel',serif;font-size:9px;font-weight:700;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-bottom:7px;padding-bottom:5px;border-bottom:1px solid var(--gold-mid);}
+  .p2-block p{font-size:13.5px;color:var(--ink-mid);margin-bottom:4px;font-family:'Lato',sans-serif;line-height:1.55;}
+  .p2-block strong{color:var(--ink);font-weight:700;}
+  #sidebar::-webkit-scrollbar{width:4px;}
+  #sidebar::-webkit-scrollbar-thumb{background:rgba(180,130,50,.15);border-radius:2px;}
+  ::-webkit-scrollbar{width:6px;}
+  ::-webkit-scrollbar-thumb{background:var(--border-dark);border-radius:3px;}
+  @media(max-width:900px){:root{--nav-w:240px;}#main{padding:32px 28px 80px;}.p2-grid{grid-template-columns:1fr;}}
+
+  /* ── MOBILE ── */
+  @media(max-width:680px){
+    :root{ --nav-w:0px; }
+
+    body{ font-size:16px; display:block; }
+
+    /* Sidebar devient un drawer depuis le bas */
+    #sidebar{
+      width:100%; height:auto; max-height:75vh;
+      position:fixed; top:auto; bottom:0; left:0; right:0;
+      border-right:none; border-top:2px solid #3a2808;
+      transform:translateY(100%);
+      transition:transform .3s cubic-bezier(.4,0,.2,1);
+      z-index:200;
+      flex-direction:column;
+    }
+    #sidebar.open{ transform:translateY(0); }
+
+    /* Bouton hamburger fixe en bas à droite */
+    #menu-toggle{
+      display:flex; align-items:center; justify-content:center;
+      position:fixed; bottom:20px; right:20px;
+      width:52px; height:52px;
+      background:var(--sidebar-bg);
+      border:2px solid rgba(180,130,50,.4);
+      border-radius:50%;
+      font-size:22px;
+      cursor:pointer;
+      z-index:300;
+      box-shadow:0 4px 16px rgba(0,0,0,.4);
+      transition:transform .2s;
+    }
+    #menu-toggle:active{ transform:scale(.93); }
+
+    /* Overlay sombre derrière le menu */
+    #menu-overlay{
+      display:none;
+      position:fixed; inset:0;
+      background:rgba(0,0,0,.5);
+      z-index:190;
+    }
+    #menu-overlay.open{ display:block; }
+
+    /* Contenu principal pleine largeur */
+    #main{
+      margin-left:0;
+      padding:28px 18px 100px;
+      max-width:100%;
+    }
+
+    /* Hero */
+    #hero h1{ font-size:24px; }
+    .hero-stats{ gap:8px; }
+    .stat{ padding:9px 14px; }
+    .stat-val{ font-size:18px; }
+
+    /* Phases */
+    .phase-header{ padding:14px 16px; gap:12px; }
+    .phase-latin{ font-size:18px; }
+    .phase-title{ font-size:13px; }
+    .phase-body{ padding:0 16px 16px; }
+    .phase-body p{ font-size:14.5px; }
+    .trophy-pills{ gap:5px; }
+    .pill{ font-size:10px; padding:2px 7px; }
+
+    /* Checklist — cacher la colonne "Quand" sur mobile */
+    .cl-when{ display:none; }
+    .cl-table th:nth-child(2){ display:none; }
+    .cl-row td:nth-child(2){ display:none; }
+    .cl-row td{ padding:8px 10px; }
+    .cl-text{ font-size:13.5px; }
+    .act-divider td{ font-size:7.5px; }
+
+    /* Trophées */
+    .trophy-hd{ flex-wrap:nowrap; }
+    .t-name{ font-size:13px; gap:5px; }
+    .t-sub{ font-size:10px; }
+    .t-type{ display:none; }
+    .tbi{ padding:16px 16px 20px; }
+    .tbi p{ font-size:15px; }
+    .steps li{ font-size:14.5px; padding-left:28px; }
+
+    /* Grilles */
+    .p2-grid{ grid-template-columns:1fr; }
+
+    /* Section headers */
+    .section-title{ font-size:17px; }
+
+    /* Feuille de route */
+    .roadmap-step{ flex-direction:column; gap:8px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="menu-overlay" onclick="closeMenu()"></div>
+<button id="menu-toggle" onclick="toggleMenu()" aria-label="Menu">⚜</button>
+
+<aside id="sidebar">
+  <div id="sidebar-header">
+    <span class="s-crest">⚜</span>
+    <div class="s-eyebrow">Guide Platine</div>
+    <h2>Kingdom Come<br>Deliverance</h2>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label">Trophées cochés <strong id="prog-count">0 / 13</strong></div>
+    <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+  </div>
+  <nav id="snav">
+    <div class="nav-group">Vue d'ensemble</div>
+    <a href="#feuille-de-route"><span class="nc" id="nc-fdr"></span>Feuille de route</a>
+
+    <div class="nav-group p1">⚜ Phase 1 — Ante Tempus</div>
+    <a href="#card-ardeor" id="na-ardeor"><span class="nc" id="nc-ardeor"></span>Ardeor<span class="m-dot"></span></a>
+    <a href="#card-galois" id="na-galois"><span class="nc" id="nc-galois"></span>Galois<span class="m-dot"></span></a>
+    <a href="#card-garconier" id="na-garconier"><span class="nc" id="nc-garconier"></span>Garçonier<span class="m-dot"></span></a>
+    <a href="#card-escoupeur" id="na-escoupeur"><span class="nc" id="nc-escoupeur"></span>Escoupeur<span class="m-dot"></span></a>
+    <a href="#card-roi-pamphile" id="na-roi-pamphile"><span class="nc" id="nc-roi-pamphile"></span>Roi Pamphile<span class="m-dot"></span></a>
+    <a href="#card-sedulier" id="na-sedulier"><span class="nc" id="nc-sedulier"></span>Sédulier<span class="m-dot"></span></a>
+    <a href="#card-peccator" id="na-peccator"><span class="nc" id="nc-peccator"></span>Peccator<span class="m-dot"></span></a>
+    <a href="#card-fisicien" id="na-fisicien"><span class="nc" id="nc-fisicien"></span>Fisicien<span class="m-dot"></span></a>
+    <a href="#card-talmbergeois" id="na-talmbergeois"><span class="nc" id="nc-talmbergeois"></span>Talmbergeois<span class="m-dot"></span></a>
+    <a href="#card-enquereor" id="na-enquereor"><span class="nc" id="nc-enquereor"></span>Enquereor<span class="m-dot"></span></a>
+    <a href="#card-traitel" id="na-traitel"><span class="nc" id="nc-traitel"></span>Traïtel<span class="m-dot"></span></a>
+
+    <div class="nav-group p2">⚔ Phase 2 — Secundum Tempus</div>
+    <a href="#phase2-detail"><span class="nc" id="nc-p2"></span>Trophées de Phase 2</a>
+
+    <div class="nav-group p3">✝ Phase 3 — Tertio Tempus</div>
+    <a href="#card-misericordiable" id="na-misericordiable"><span class="nc" id="nc-misericordiable"></span>Misericordiable<span class="m-dot"></span></a>
+    <a href="#card-pucelet" id="na-pucelet"><span class="nc" id="nc-pucelet"></span>Pucelet<span class="m-dot"></span></a>
+  </nav>
+  <button class="reset-btn" onclick="resetAll()">↺ Réinitialiser</button>
+</aside>
+
+<main id="main">
+
+  <section id="hero">
+    <div class="eyebrow">Bohème, An de Grâce 1403</div>
+    <h1>Kingdom Come<br><em>Deliverance</em></h1>
+    <p class="subtitle">Guide Platine · 3 phases · Noms français vérifiés · Noms des quêtes exacts</p>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-val">50</span><span class="stat-lbl">Trophées</span></div>
+      <div class="stat"><span class="stat-val red">12</span><span class="stat-lbl">Manquables</span></div>
+      <div class="stat"><span class="stat-val">~150h</span><span class="stat-lbl">Pour le Platine</span></div>
+      <div class="stat"><span class="stat-val">5/10</span><span class="stat-lbl">Difficulté</span></div>
+    </div>
+  </section>
+
+  <!-- ═══ FEUILLE DE ROUTE ═══ -->
+  <section class="section" id="feuille-de-route">
+    <div class="section-hd"><h2 class="section-title">Feuille de Route</h2><div class="section-rule"></div></div>
+
+    <div class="callout c-warn" style="margin-bottom:16px;"><strong>⚠ Mettez à jour le jeu en version 1.05 minimum</strong> avant de commencer. Le mode Hardcore (MAJ 1.08) a ses propres trophées dans une liste séparée — ils ne comptent pas pour le Platine du jeu de base.</div>
+
+    <div class="callout c-info" style="margin-bottom:20px;"><strong>Sauvegardes :</strong> Le jeu sauvegarde automatiquement à chaque activation d'une Quête principale, à certains moments-clés des Quêtes secondaires, et quand Henry dort ou va aux bains publics (sous condition de n'avoir aucune sauvegarde similaire dans les 24h). La sauvegarde manuelle s'effectue en buvant un <strong>Schnaps du Sauveur</strong> (chez la plupart des marchands ou à fabriquer en Alchimie). Depuis la MAJ 1.05, la fonction "Sauvegarder et revenir au menu" est disponible — une seule de ce type à la fois, chargeable uniquement depuis le Menu principal.</div>
+
+    <div class="phase-block phase-p1">
+      <div class="phase-header">
+        <div class="phase-latin">I</div>
+        <div class="phase-titles">
+          <div class="phase-num">Ante Tempus — Phase 1</div>
+          <div class="phase-title">Finir l'histoire et toutes les quêtes secondaires</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <p>Jouez librement. La seule contrainte est de maintenir votre <strong>Réputation</strong> dans toutes les localités (pour <strong>Roi Pamphile</strong>). Vous pouvez tuer, vous battre, coucher avec qui vous voulez — Misericordiable et Pucelet se font en Phase 3.</p>
+        <p>Complétez toutes les <strong>Quêtes principales</strong>, <strong>Quêtes secondaires</strong> et <strong>Activités</strong> dès qu'elles apparaissent pour faire tomber <strong>Sédulier</strong>. <strong>Impératif :</strong> tout ce qui touche à Talmberg doit être fait avant de pénétrer dans Vranik lors de la Quête principale <em>"Les dés sont jetés"</em>.</p>
+        <div class="trophy-pills">
+          <span class="pill pill-green">Ardeor</span><span class="pill pill-green">Fiz de fabre</span><span class="pill pill-orange">Galois</span><span class="pill pill-green">Esveillement</span><span class="pill pill-green">Acoint</span><span class="pill pill-orange">Escoupeur</span><span class="pill pill-orange">Rousselet</span><span class="pill pill-orange">Garçonier</span><span class="pill pill-orange">Peccator</span><span class="pill pill-orange">Diablier</span><span class="pill pill-orange">Rescorreor</span><span class="pill pill-orange">Nobile marpaut</span><span class="pill pill-green">Le Haingre</span><span class="pill pill-orange">Abesté</span><span class="pill pill-orange">Mestre veneur</span><span class="pill pill-orange">Fisicien</span><span class="pill pill-orange">Traïtel</span><span class="pill pill-green">Ecclesiastre</span><span class="pill pill-green">Fils de porchas</span><span class="pill pill-green">Conquesteur</span><span class="pill pill-orange">Talmbergeois</span><span class="pill pill-orange">Enquereor</span><span class="pill pill-gold">Defin</span>
+        </div>
+        <p style="margin-top:10px;font-size:13.5px;font-family:'Lato',sans-serif;color:var(--ink-dim);">
+          <span style="color:var(--green);font-weight:700;">■ Vert</span> = immanquable lié à l'histoire &nbsp;|&nbsp;
+          <span style="color:var(--orange);font-weight:700;">■ Orange</span> = manquable lors d'une quête spécifique
+        </p>
+      </div>
+    </div>
+
+    <div class="phase-block phase-p2">
+      <div class="phase-header">
+        <div class="phase-latin">II</div>
+        <div class="phase-titles">
+          <div class="phase-num">Secundum Tempus — Phase 2</div>
+          <div class="phase-title">Trophées de combat, d'exploration et d'accumulation</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <p>Rechargez la sauvegarde automatique du début de la Quête principale <strong>"Épilogue"</strong>. Aucun de ces trophées n'est manquable définitivement.</p>
+        <p><strong>Combat :</strong> Tapinois (20 tirs furtifs) · Mordreor (200 personnes) · Batailleret (100 combos) · Fin traieor (50 tirs à la tête). <strong>Expérience :</strong> Enlangagié (Éloquence max) · A tous espleus (niveau max toutes stats). <strong>Accumulation :</strong> Bote-en-coroie (dérober 30 000 groschen) · Main clanche (5 000 groschen en poche) · Barguigneur (2 000 économisés) · Hasart (1 000 aux dés) · Venateur (50 animaux) · David Horak (10 000 herbes) · Nicolas Flamel (15 potions différentes) · Liseor (20 livres). <strong>Exploration :</strong> Peregrin (90 sanctuaires et croix mémoriales) · Aleor (50 km à pied). <strong>Divers :</strong> Ivroin · Insompnité · Vide-escuelle · Famelart · Chaitif.</p>
+      </div>
+    </div>
+
+    <div class="phase-block phase-p3">
+      <div class="phase-header">
+        <div class="phase-latin">III</div>
+        <div class="phase-titles">
+          <div class="phase-num">Tertio Tempus — Phase 3</div>
+          <div class="phase-title">Seconde partie — sans tuer personne et en restant vierge</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <p><strong>Nouvelle partie complète.</strong> Deux contraintes : ne jamais tuer personne (<strong>Misericordiable</strong>) et ne pas succomber aux plaisirs de la chair (<strong>Pucelet</strong>). Aller à l'essentiel : <strong>uniquement les Quêtes principales</strong>. L'<strong>Éloquence</strong> est votre meilleure alliée — montez-la en priorité dès l'introduction.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CHECKLIST PHASE 1 ═══ -->
+  <section class="section" id="checklist-p1">
+    <div class="section-hd"><h2 class="section-title">Checklist — Phase 1</h2><div class="section-rule"></div></div>
+    <table class="cl-table">
+      <thead><tr><th style="width:28px"></th><th style="width:165px">Quand</th><th>Action requise</th></tr></thead>
+      <tbody>
+        <tr class="act-divider"><td colspan="3">Prologue — Skalice</td></tr>
+        <tr class="cl-row crit" data-id="cl1"><td><div class="cl-box" id="cl-check-1"></div></td><td class="cl-when">Tout début du jeu</td><td class="cl-text">Dans Skalice, voler quelque chose sur un étal devant des témoins → se laisser arrêter (L1) → cinématique spéciale. <span class="badge-m">Ardeor</span></td></tr>
+        <tr class="cl-row crit" data-id="cl2"><td><div class="cl-box" id="cl-check-2"></div></td><td class="cl-when">QP "Cours !"</td><td class="cl-text">En fuyant Skalice, entendre <strong>Thérèse</strong> crier et <strong>aller la secourir</strong> avant de prendre le cheval. <span class="badge-m">Galois</span></td></tr>
+
+        <tr class="act-divider"><td colspan="3">Rattay — Début de partie</td></tr>
+        <tr class="cl-row" data-id="cl3"><td><div class="cl-box" id="cl-check-3"></div></td><td class="cl-when">QP "Ronde de nuit"</td><td class="cl-text">Parler au garde <strong>Rossignol</strong> → quête secondaire <strong>"Un brin de cour"</strong> se débloque → aller voir Thérèse au moulin de Rattay → compléter toute la quête. <span class="badge-m">Garçonier</span></td></tr>
+        <tr class="cl-row" data-id="cl4"><td><div class="cl-box" id="cl-check-4"></div></td><td class="cl-when">QP "Maintien de l'ordre" ou "Ronde de nuit"</td><td class="cl-text">Parler au Bailli ou à l'Apothicaire → quête <strong>"Plus forte que l'épée"</strong> → aller à Uzice chez le Greffier → payer pour apprendre à lire. Répondre : <em>"Que l'avidité ne paît point"</em> puis <em>"Nullus est liber tam malus…"</em>. <span class="badge-g">Indispensable pour Fisicien et Talmbergeois</span></td></tr>
+        <tr class="cl-row" data-id="cl5"><td><div class="cl-box" id="cl-check-5"></div></td><td class="cl-when">Dès que possible après Rattay</td><td class="cl-text">Retourner à Talmberg, parler à <strong>Dame Thifaine</strong> à l'étage du château → quête <strong>"À votre service, ma Dame"</strong> → lui apporter vin, couronne, cheval → accepter d'essayer sa chemise (<em>"D'accord"</em>). <span class="badge-m">Escoupeur</span></td></tr>
+        <tr class="cl-row" data-id="cl6"><td><div class="cl-box" id="cl-check-6"></div></td><td class="cl-when">En permanence</td><td class="cl-text">Marchander à chaque achat/vente (maintenir X). Ne jamais voler ni agresser devant des témoins. Perk <strong>"Anonyme"</strong> (niveaux principaux) pour booster la Réputation. <span class="badge-m">Roi Pamphile</span></td></tr>
+
+        <tr class="act-divider"><td colspan="3">Quêtes Principales — Ordre Chronologique</td></tr>
+        <tr class="cl-row crit" data-id="cl7"><td><div class="cl-box" id="cl-check-7"></div></td><td class="cl-when">QP "Ginger en difficulté"</td><td class="cl-text">Au 3e camp, parler aux jumeaux et accepter de <strong>tuer les bandits</strong> (ne pas mentir sur leur mort supposée). Les tuer. Parler à Ginger : <em>"Allez-y et voyez ce qui se passe"</em>. Retour à Neuhof, parler à Radzig. <strong>Attendre 24h.</strong> Parler à Ginger à Neuhof. <span class="badge-m">Rousselet</span></td></tr>
+        <tr class="cl-row crit" data-id="cl8"><td><div class="cl-box" id="cl-check-8"></div></td><td class="cl-when">QP "Les voies mystérieuses"</td><td class="cl-text">Après avoir parlé au Père Godwin, avancer le temps jusqu'à la nuit. Aller à la taverne d'Uzice. S'asseoir avec le prêtre → <strong>toujours choisir la 1ère option de dialogue</strong> → accepter de boire à la fin (1ère option). Cinématique → trophée. <span class="badge-m">Peccator</span></td></tr>
+        <tr class="cl-row crit" data-id="cl9"><td><div class="cl-box" id="cl-check-9"></div></td><td class="cl-when">QP "Questions et réponses"</td><td class="cl-text">La quête secondaire <strong>"Le fléau"</strong> se déclenche à Mehrojed. La compléter sans tarder : identifier l'empoisonnement du puits, préparer le remède avec Nicodème (savoir lire requis), soigner <strong>tous</strong> les malades. <span class="badge-m">Fisicien</span></td></tr>
+        <tr class="cl-row crit" data-id="cl10"><td><div class="cl-box" id="cl-check-10"></div></td><td class="cl-when">Monastère de Sasau — dès accès</td><td class="cl-text">Compléter la quête secondaire <strong>"À la merci de Dieu"</strong> (parler à Jeanne à l'infirmerie du monastère, soigner tous les blessés). <strong>Ne pas la laisser échouer</strong> → elle est indispensable pour Talmbergeois. <span class="badge-m">Talmbergeois (prérequis)</span></td></tr>
+        <tr class="cl-row crit" data-id="cl11"><td><div class="cl-box" id="cl-check-11"></div></td><td class="cl-when">AVANT "Les dés sont jetés"</td><td class="cl-text">Finir <strong>toutes</strong> les quêtes secondaires et activités liées à Talmberg. Après cette quête principale, beaucoup deviennent inaccessibles. <span class="badge-m">Sédulier (en partie)</span></td></tr>
+        <tr class="cl-row crit" data-id="cl12"><td><div class="cl-box" id="cl-check-12"></div></td><td class="cl-when">QP "Le siège" (24e QP)</td><td class="cl-text">Compléter <strong>TOUS les objectifs facultatifs</strong> qui apparaissent dans le journal (recruter Nicodème + Père Godwin ou Père Simon, trouver l'herboriste pour Bernard). "À la merci de Dieu" doit être validée. <span class="badge-m">Talmbergeois</span></td></tr>
+        <tr class="cl-row crit" data-id="cl13"><td><div class="cl-box" id="cl-check-13"></div></td><td class="cl-when">QP "Valeurs familiales" (26e QP)</td><td class="cl-text">Interrogatoire d'<strong>Éric</strong> en prison → <strong>réussir TOUS les tests de persuasion</strong> sans exception (2 Éloquence, 1 Impression, 1 Intimidation). Recharger la sauvegarde auto de début de quête si raté. <span class="badge-m">Enquereor</span></td></tr>
+        <tr class="cl-row crit" data-id="cl14"><td><div class="cl-box" id="cl-check-14"></div></td><td class="cl-when">Quête "Frères de potence"</td><td class="cl-text">Compléter toute la chaîne de quêtes de <strong>Mathieu et Fritz</strong> (trouvés près de la taverne du monastère de Sasau). À la fin, les trahir. <span class="badge-m">Traïtel</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ═══ FICHES MANQUABLES PHASE 1 ═══ -->
+  <section class="section" id="fiches-p1">
+    <div class="section-hd"><h2 class="section-title">Fiches — Trophées Manquables Phase 1</h2><div class="section-rule"></div></div>
+
+    <!-- ARDEOR -->
+    <div class="trophy-card" id="card-ardeor">
+      <div class="trophy-hd" data-card="ardeor">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles">
+          <div class="t-name">Ardeor <span class="badge b-red">⚠ Prologue uniquement</span></div>
+          <div class="t-sub">Être enfermé dans les geôles de Skalice — tout début du jeu</div>
+        </div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="ardeor"><div class="t-check" id="cc-ardeor">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <div class="callout c-danger"><strong>À faire en premier, avant tout.</strong> Skalice n'est accessible qu'au prologue. L'attaque se déclenche rapidement.</div>
+        <ul class="steps">
+          <li>Dans <strong>Skalice</strong> (prologue), voler un article sur un étal de nourriture <strong>devant des témoins</strong> (assurez-vous qu'il y a des gens autour).</li>
+          <li>Un garde arrive pour vous arrêter. Appuyer sur <strong>L1</strong> pour vous rendre sans résistance.</li>
+          <li>Une cinématique spéciale se déclenche → trophée pop.</li>
+        </ul>
+        <div class="callout c-tip"><strong>Conseil :</strong> Faites-le dès que vous avez un peu de liberté dans le prologue, avant de lancer les événements de l'attaque en parlant à votre père.</div>
+      </div></div>
+    </div>
+
+    <!-- GALOIS -->
+    <div class="trophy-card" id="card-galois">
+      <div class="trophy-hd" data-card="galois">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles">
+          <div class="t-name">Galois <span class="badge b-red">⚠ QP "Cours !"</span></div>
+          <div class="t-sub">Sauver Thérèse des Coumans pendant la fuite de Skalice</div>
+        </div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="galois"><div class="t-check" id="cc-galois">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <p>En fuyant Skalice lors de la quête <strong>"Cours !"</strong>, vous devez trouver un cheval. En chemin, vous entendez une femme — <strong>Thérèse</strong> — crier au secours.</p>
+        <ul class="steps">
+          <li>Ne pas aller directement au cheval. Suivre les cris de Thérèse.</li>
+          <li>Tuer les soldats Coumans qui l'entourent. Ce combat <strong>n'invalide pas Misericordiable</strong>.</li>
+          <li>Le trophée pop après l'avoir sauvée. Elle réapparaît plus tard dans le jeu.</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- GARCONIER -->
+    <div class="trophy-card" id="card-garconier">
+      <div class="trophy-hd" data-card="garconier">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles">
+          <div class="t-name">Garçonier <span class="badge b-orange">Quête annexe "Un brin de cour"</span></div>
+          <div class="t-sub">Faire la cour à Thérèse, la fille du meunier</div>
+        </div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="garconier"><div class="t-check" id="cc-garconier">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <p>La quête <strong>"Un brin de cour"</strong> se débloque lors de la QP <em>"Ronde de nuit"</em> en parlant au garde <strong>Rossignol</strong>.</p>
+        <ul class="steps">
+          <li>Parler à Rossignol → aller voir <strong>Thérèse</strong> au moulin de Rattay → lui proposer une promenade.</li>
+          <li>Compléter l'intégralité de la quête "Un brin de cour".</li>
+          <li>Le trophée pop à la fin de la quête.</li>
+        </ul>
+        <div class="callout c-info"><strong>Note :</strong> Peu importe si vous avez sauvé Thérèse au prologue (Galois) ou non — elle se retrouve au moulin de Rattay dans tous les cas.</div>
+      </div></div>
+    </div>
+
+    <!-- ESCOUPEUR -->
+    <div class="trophy-card" id="card-escoupeur">
+      <div class="trophy-hd" data-card="escoupeur">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles">
+          <div class="t-name">Escoupeur <span class="badge b-orange">Quête annexe "À votre service, ma Dame"</span></div>
+          <div class="t-sub">Faire la cour à Dame Thifaine — château de Talmberg</div>
+        </div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="escoupeur"><div class="t-check" id="cc-escoupeur">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <p>Après avoir rejoint la garnison de Sir Radzig (QP <em>"L'Éveil"</em>), retournez à <strong>Talmberg</strong>. Dame <strong>Thifaine</strong> se trouve à l'étage du château.</p>
+        <div class="callout c-warn"><strong>Attention :</strong> Ne pas confondre avec votre première visite scénaristique à Talmberg. La quête "À votre service, ma Dame" ne se déclenche qu'après avoir rejoint Rattay.</div>
+        <ul class="steps">
+          <li>Parler à Dame Thifaine → elle donne la quête <strong>"À votre service, ma Dame"</strong>.</li>
+          <li>Lui apporter : du <strong>vin</strong>, une <strong>couronne</strong> et un <strong>cheval</strong> (selon les étapes de la quête).</li>
+          <li>À la fin, elle vous offre une chemise. Choisir <em>"D'accord"</em> pour l'essayer → trophée.</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- ROI PAMPHILE -->
+    <div class="trophy-card" id="card-roi-pamphile">
+      <div class="trophy-hd" data-card="roi-pamphile">
+        <div class="t-bar argent"></div><div class="t-dot-wrap"><div class="t-dot argent"></div></div>
+        <div class="t-titles">
+          <div class="t-name">Roi Pamphile <span class="badge b-red">⚠ Toute la Phase 1</span></div>
+          <div class="t-sub">Être bien reçu dans chaque ville et village — Réputation 80+ partout</div>
+        </div>
+        <div class="t-type argent">Argent</div>
+        <div class="t-check-btn" data-done="roi-pamphile"><div class="t-check" id="cc-roi-pamphile">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <h4>Les 10 Localités Requises</h4>
+        <p>Uzice · Monastère de Sasau · Rattay · Neuhof · Sasau · Ledetchko · Talmberg · Skalice · Mehrojed · Samopesh</p>
+        <p><strong>Non requises</strong> (ignorez-les) : Moulin · Rovna · Pribyslavitz · Vranik</p>
+        <ul class="steps">
+          <li>Prendre le perk <strong>"Anonyme"</strong> (niveaux principaux) dès le niveau 10 — augmente la Réputation gagnée.</li>
+          <li>Marchander avec <strong>chaque marchand</strong> de chaque zone : payer plus que demandé en achetant, ou accepter moins en vendant. Aucun marchand n'y résiste.</li>
+          <li>Compléter toutes les quêtes secondaires disponibles dans chaque zone.</li>
+          <li>Ne jamais voler ni agresser devant des témoins.</li>
+          <li><strong>Monastère :</strong> Compléter les quêtes annexes <em>"Une vie cloîtrée"</em> et les quêtes du monastère après y être entré dans la QP <em>"Une aiguille dans une botte de foin"</em>.</li>
+          <li><strong>Mehrojed :</strong> Soigner tous les malades (quête "Le fléau", voir Fisicien) + astuce bandits : voyager en fast travel entre Samopesh et l'Auberge de la Clairière jusqu'à ce qu'un groupe de bandits apparaisse au sud de Mehrojed. Les tuer donne de la Réputation locale.</li>
+        </ul>
+        <div class="callout c-tip"><strong>Suivi de la Réputation :</strong> Menu Pause → Personnage → Réputation. Vous pouvez vérifier votre niveau pour chaque localité à tout moment.</div>
+      </div></div>
+    </div>
+
+    <!-- SEDULIER -->
+    <div class="trophy-card" id="card-sedulier">
+      <div class="trophy-hd" data-card="sedulier">
+        <div class="t-bar argent"></div><div class="t-dot-wrap"><div class="t-dot argent"></div></div>
+        <div class="t-titles">
+          <div class="t-name">Sédulier <span class="badge b-red">⚠ Avant "Les dés sont jetés"</span></div>
+          <div class="t-sub">Terminer l'ensemble des quêtes — 80 sur 105 suffisent</div>
+        </div>
+        <div class="t-type argent">Argent</div>
+        <div class="t-check-btn" data-done="sedulier"><div class="t-check" id="cc-sedulier">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <div class="callout c-tip"><strong>Bonne nouvelle :</strong> Ce trophée est glitché positivement — seules <strong>80 quêtes sur 105</strong> sont nécessaires. N'importe quelle combinaison de QP, QS et Activités fonctionne.</div>
+        <ul class="steps">
+          <li>Faire toutes les quêtes disponibles dès qu'elles apparaissent.</li>
+          <li><strong>Point critique :</strong> La QP <em>"Les dés sont jetés"</em> rend de nombreuses quêtes de Talmberg indisponibles. Tout finir avant d'entrer dans Vranik.</li>
+          <li>Suivi : Menu Pause → Joueur → Statistiques → Quêtes → Quêtes complétées. À 80 → trophée.</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- ROUSSELET -->
+    <div class="trophy-card" id="card-rousselet" style="scroll-margin-top:24px;">
+      <div class="trophy-hd" data-card="rousselet">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles">
+          <div class="t-name">Rousselet <span class="badge b-red">⚠ QP "Ginger en difficulté"</span></div>
+          <div class="t-sub">Sauver Ginger des bandits</div>
+        </div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="rousselet"><div class="t-check" id="cc-rousselet">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <div class="callout c-danger"><strong>Incompatible avec Misericordiable dans la même partie</strong> si vous jouez en Phase 1 normalement — vous devez tuer les bandits pour obtenir ce trophée, ce qui void Misericordiable. En Phase 3, mentez aux charbonniers pour éviter le meurtre (et perdez Rousselet dans ce run).</div>
+        <ul class="steps">
+          <li>Trouver les 3 camps de charbonniers. Au 3e camp, parler aux jumeaux et <strong>accepter de tuer les bandits</strong> (ne pas mentir que vous l'avez déjà fait).</li>
+          <li>Aller tuer les bandits dans les bois au nord-est.</li>
+          <li>Retourner aux charbonniers → ils indiquent où est <strong>Ginger</strong>. Lui parler : choisir <em>"Allez-y et voyez ce qui se passe"</em>.</li>
+          <li>Revenir à Neuhof, parler à Sir Radzig pour terminer la quête. <strong>Attendre 24 heures</strong> (Touchpad > Attendre).</li>
+          <li>Ginger réapparaît à Neuhof → lui parler → trophée.</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- PECCATOR -->
+    <div class="trophy-card" id="card-peccator">
+      <div class="trophy-hd" data-card="peccator">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles">
+          <div class="t-name">Peccator <span class="badge b-orange">QP "Les voies mystérieuses"</span></div>
+          <div class="t-sub">S'enivrer avec le Père Godwin à la taverne d'Uzice</div>
+        </div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="peccator"><div class="t-check" id="cc-peccator">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <div class="callout c-danger"><strong>En Phase 3 (run Pucelet), évitez impérativement cette scène.</strong> Boire avec le prêtre rompt le vœu de chasteté et invalide Pucelet.</div>
+        <ul class="steps">
+          <li>Lors de la QP <em>"Les voies mystérieuses"</em>, le <strong>Père Godwin</strong> vous invite à la taverne le soir.</li>
+          <li>Avancer le temps jusqu'à la nuit (Touchpad > Attendre ou dormir). Aller à la taverne près de l'église d'Uzice.</li>
+          <li>S'asseoir avec le prêtre. <strong>Toujours choisir la 1ère option de dialogue</strong> à chaque choix.</li>
+          <li>À la fin, accepter de boire (1ère option) → cinématique unique → trophée.</li>
+        </ul>
+        <div class="callout c-tip"><strong>2ème chance :</strong> Si vous ne venez pas à la taverne, vous pouvez vous excuser auprès du Père Godwin le lendemain pour une nouvelle invitation.</div>
+      </div></div>
+    </div>
+
+    <!-- FISICIEN -->
+    <div class="trophy-card" id="card-fisicien">
+      <div class="trophy-hd" data-card="fisicien">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles">
+          <div class="t-name">Fisicien <span class="badge b-red">⚠ QS "Le fléau" — Mehrojed</span></div>
+          <div class="t-sub">Soigner tous les malades de Mehrojed</div>
+        </div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="fisicien"><div class="t-check" id="cc-fisicien">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <div class="callout c-danger"><strong>Prérequis absolu :</strong> Savoir lire est indispensable pour préparer le remède. Apprenez à lire dès le début via la quête <em>"Plus forte que l'épée"</em> à Uzice (Greffier, 60 groschen). <strong>Ne tardez pas</strong> : si trop de temps passe après le déclenchement de "Le fléau", les villageois meurent et la quête devient impossible.</div>
+        <ul class="steps">
+          <li>La quête <strong>"Le fléau"</strong> se déclenche à Mehrojed lors de la QP <em>"Questions et réponses"</em> en parlant à Mélichar le Bailli.</li>
+          <li>Identifier la source : empoisonnement du puits par les bandits. Éliminer les bandits.</li>
+          <li>Aller chercher <strong>Nicodème</strong> au monastère de Sasau. Lui annoncer l'empoisonnement de l'eau → il prépare le remède ou vous aide à le faire.</li>
+          <li>À l'alambic du monastère, préparer la potion selon la recette (lire le livre).</li>
+          <li>Revenir à Mehrojed. Soigner <strong>chaque malade</strong> individuellement : <strong>Vincent</strong>, <strong>Bedrishka</strong> et <strong>Daniel</strong>. Ne pas en oublier un seul.</li>
+          <li>Attendre que le remède fasse effet, puis parler à Mélichar → trophée.</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- TALMBERGEOIS -->
+    <div class="trophy-card" id="card-talmbergeois">
+      <div class="trophy-hd" data-card="talmbergeois">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles">
+          <div class="t-name">Talmbergeois <span class="badge b-red">⚠ QP "Le siège" — 24e quête</span></div>
+          <div class="t-sub">Réussir tous les objectifs facultatifs de la quête du Siège</div>
+        </div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="talmbergeois"><div class="t-check" id="cc-talmbergeois">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <div class="callout c-danger"><strong>Prérequis critique :</strong> La quête secondaire <strong>"À la merci de Dieu"</strong> (monastère de Sasau, parler à Jeanne l'infirmière) doit être <strong>complétée</strong> avant le Siège. Sans cela, Nicodème refusera de vous aider et les objectifs facultatifs deviendront impossibles.</div>
+        <h4>Pendant la quête "Le siège"</h4>
+        <ul class="steps">
+          <li>Objectif 1 — Recruter un <strong>médecin</strong> : aller à Sasau, demander l'aide de <strong>Nicodème</strong> (disponible car "À la merci de Dieu" est validée).</li>
+          <li>Objectif 2 — Recruter un <strong>prêtre</strong> : aller à Uzice, convaincre le <strong>Père Godwin</strong>. Si vous avez bu avec lui (Peccator), il accepte sans condition. Sinon, utiliser l'Éloquence. Autre option : le Père Simon à Rovna après la quête "Un homme de foi".</li>
+          <li>Objectif 3 — Trouver un <strong>herboriste</strong> pour le Capitaine Bernard (potions de veille pour les sentinelles). Voir avec Bernard au campement.</li>
+          <li>Valider chaque objectif auprès de <strong>Divish</strong> au camp avant de lancer l'assaut.</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- ENQUEREOR -->
+    <div class="trophy-card" id="card-enquereor">
+      <div class="trophy-hd" data-card="enquereor">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles">
+          <div class="t-name">Enquereor <span class="badge b-orange">QP "Valeurs familiales" — 26e quête</span></div>
+          <div class="t-sub">Mettre en lumière le passé d'Éric — réussir tous les tests de persuasion</div>
+        </div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="enquereor"><div class="t-check" id="cc-enquereor">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <div class="callout c-warn"><strong>Depuis la MAJ 1.3 :</strong> L'interrogatoire comporte 2 tests d'Éloquence, 1 test d'Impression et 1 test d'Intimidation. Avoir une Éloquence de 15+ est recommandé. Une armure propre et bien réparée améliore l'Impression.</div>
+        <ul class="steps">
+          <li>Lors de la 26e QP <em>"Valeurs familiales"</em>, interroger <strong>Éric</strong> (et non Jirek) en prison.</li>
+          <li>Réussir <strong>tous les tests de persuasion sans exception</strong>.</li>
+          <li>Si un test échoue : recharger la sauvegarde automatique du début de cette quête (visible dans le menu de chargement).</li>
+          <li>Des potions d'Éloquence peuvent être bues juste avant l'interrogatoire.</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- TRAITEL -->
+    <div class="trophy-card" id="card-traitel">
+      <div class="trophy-hd" data-card="traitel">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles">
+          <div class="t-name">Traïtel <span class="badge b-orange">Quête "Frères de potence"</span></div>
+          <div class="t-sub">Trahir vos amis lors de la quête Frères de potence</div>
+        </div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="traitel"><div class="t-check" id="cc-traitel">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <p><strong>Mathieu</strong> et <strong>Fritz</strong> se trouvent près de la taverne du monastère de Sasau (ils s'appuient contre un poteau non loin du pont qui relie au sud de Sasau). Compléter toute leur chaîne de quêtes.</p>
+        <ul class="steps">
+          <li>Compléter l'intégralité de la chaîne de quêtes de Mathieu et Fritz.</li>
+          <li>À la fin de la chaîne, <strong>trahir ses amis</strong> → trophée.</li>
+        </ul>
+        <div class="callout c-warn"><strong>Attention aux bugs :</strong> Cette chaîne de quêtes était très instable dans les premières versions du jeu. Avec la version 1.05+, elle est plus stable. En cas de bug bloquant, recharger la sauvegarde de début de la quête concernée.</div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ═══ PHASE 2 ═══ -->
+  <section class="section" id="phase2-detail">
+    <div class="section-hd"><h2 class="section-title">Phase 2 — Trophées Non Manquables</h2><div class="section-rule"></div></div>
+    <div class="callout c-info" style="margin-bottom:18px;"><strong>Aucun de ces trophées ne peut être définitivement manqué.</strong> Rechargez la sauvegarde auto du début de l'Épilogue et récoltez-les dans cet ordre. Continuez l'accumulation en Phase 3 si nécessaire.</div>
+
+    <div class="p2-grid">
+      <div class="p2-block">
+        <div class="p2-title">⚔ Combat</div>
+        <p><strong>Tapinois</strong> — 20 tirs furtifs. Perk "Assassinat" (Furtivité niv. 5) + dague. Sneak attack sur des ennemis hostiles uniquement (pas les gardes innocents).</p>
+        <p><strong>Mordreor</strong> — 200 personnes tuées. Uniquement en Phase 2 ou 3 (après Misericordiable). Voyager entre deux points fait apparaître des bandits sur les routes.</p>
+        <p><strong>Batailleret</strong> — 100 combos en combat. S'entraîner avec le Capitaine Bernard à Rattay (arène, uniquement de jour). Un combo = 3 attaques lourdes enchaînées.</p>
+        <p><strong>Fin traieor</strong> — 50 tirs à la tête sur des ennemis. Laisser un bandit s'approcher, viser la tête à bout portant. Les gardes ne comptent pas.</p>
+      </div>
+      <div class="p2-block">
+        <div class="p2-title">📈 Expérience</div>
+        <p><strong>Enlangagié</strong> — Éloquence niveau maximum (20). Se fait naturellement avec les dialogues. 4 livres spéciaux en fin de partie accélèrent : aubergiste de Rattay, charlatan de Sasau, mendiant errant (événement aléatoire), trésor n°15.</p>
+        <p><strong>A tous espleus</strong> — Niveau maximum (toutes stats à 20). Astuce : assommer le tanneur à gauche du Moulin de Rattay, jeter son corps dans la rivière, frapper le corps inconscient avec R2 pendant 20 min → Robustesse, Agilité et Vitalité max.</p>
+      </div>
+      <div class="p2-block">
+        <div class="p2-title">📦 Accumulation</div>
+        <p><strong>Bote-en-coroie</strong> — Dérober pour 30 000 groschen. Cambrioler les armureries et marchands d'armes (articles de valeur). Faire une sauvegarde avant.</p>
+        <p><strong>Main clanche</strong> — Avoir 5 000 groschen en poche en même temps. Les trésors cachés (cartes au trésor) donnent vite 10 000+ groschen.</p>
+        <p><strong>Barguigneur</strong> — Économiser 2 000 groschen en marchandant. Marchander à chaque achat/vente (maintenir X). Se fait naturellement tout au long du jeu.</p>
+        <p><strong>Hasart</strong> — Gagner 1 000 groschen aux dés. Auberge du monastère de Sasau, table de dés entre 18h et 22h. Astuce : faire la mise max puis abandonner immédiatement → l'adversaire garde votre mise. Répéter jusqu'à ce qu'il ait 1 000 groschen, puis gagner une partie.</p>
+      </div>
+      <div class="p2-block">
+        <div class="p2-title">🌿 Farming</div>
+        <p><strong>David Horak</strong> — 10 000 herbes. Se fait en 1-3h dans une prairie. Le niveau d'Herboristerie donne un multiplicateur.</p>
+        <p><strong>Nicolas Flamel</strong> — 15 potions <em>différentes</em>. Alambics chez les herboristes ou au monastère. Les recettes s'accumulent naturellement.</p>
+        <p><strong>Liseor</strong> — Lire 20 livres différents. Acheter/voler chez les scribes. Les livres de compétences comptent aussi.</p>
+        <p><strong>Venateur</strong> — 50 animaux chassés. Bois au sud d'Uzice. Courir après les animaux jusqu'à ce qu'ils se bloquent contre un arbre.</p>
+      </div>
+      <div class="p2-block">
+        <div class="p2-title">🗺️ Exploration</div>
+        <p><strong>Peregrin</strong> — 90 sanctuaires et croix mémoriales <em>interagis</em> (appuyer X). Longer toutes les routes à cheval. La simple détection ne suffit pas.</p>
+        <p><strong>Aleor</strong> — 50 km à pied. Se fait naturellement en jouant.</p>
+        <p><strong>Errier</strong> — Découvrir tous les emplacements de la carte. Se fait automatiquement en suivant l'histoire.</p>
+      </div>
+      <div class="p2-block">
+        <div class="p2-title">🎭 Divers</div>
+        <p><strong>Ivroin</strong> — Devenir alcoolique. Boire 30-40 bouteilles sur plusieurs jours. Alterner : boire à fond → attendre 24h via Touchpad (pas dormir). Recharger après pour récupérer l'état.</p>
+        <p><strong>Insompnité</strong> — Ne pas dormir 2 jours. Avancer le temps via Touchpad.</p>
+        <p><strong>Vide-escuelle</strong> — Être repu 2 jours. Manger toutes les 8h en avançant le temps.</p>
+        <p><strong>Famelart</strong> — Affamé 3 jours. Avancer le temps 72h sans manger.</p>
+        <p><strong>Chaitif</strong> — 3 jours en prison. Attaquer quelqu'un en public, se rendre (L1+X).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PHASE 3 ═══ -->
+  <section class="section" id="phase3-detail">
+    <div class="section-hd"><h2 class="section-title">Phase 3 — Misericordiable et Pucelet</h2><div class="section-rule"></div></div>
+    <div class="callout c-danger" style="margin-bottom:20px;"><strong>Nouvelle partie complète requise.</strong> Profitez de votre maîtrise du jeu : ne faites que les <strong>Quêtes principales</strong>. Montez l'<strong>Éloquence</strong> en priorité dès l'introduction — elle vous évitera la majorité des combats.</div>
+
+    <!-- MISERICORDIABLE -->
+    <div class="trophy-card" id="card-misericordiable">
+      <div class="trophy-hd" data-card="misericordiable">
+        <div class="t-bar or"></div><div class="t-dot-wrap"><div class="t-dot or"></div></div>
+        <div class="t-titles">
+          <div class="t-name">Misericordiable <span class="badge b-red">⚠ Phase 3 — Or</span></div>
+          <div class="t-sub">Ne tuer personne pendant l'histoire principale — sauf le Haingre</div>
+        </div>
+        <div class="t-type or">Or</div>
+        <div class="t-check-btn" data-done="misericordiable"><div class="t-check" id="cc-misericordiable">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <div class="callout c-danger">Suivi : Menu Pause → Joueur → Statistiques → Combat → Personnes Tuées. Doit rester à <strong>0</strong> jusqu'à la mort du Haingre (passe ensuite à 1, c'est normal et attendu).</div>
+        <h4>Stratégie générale</h4>
+        <p>Utiliser exclusivement les <strong>poings nus</strong> (les armes contondantes peuvent tuer si elles font trop de dégâts). Favoriser les <strong>éliminations furtives</strong> par derrière (L2 = K.O. sans tuer). L'<strong>Éloquence</strong> permet souvent d'éviter entièrement le combat.</p>
+        <h4>Points Critiques — Quêtes Problématiques</h4>
+        <ul class="steps">
+          <li><strong>QP "Cours !" :</strong> Sauver Thérèse est autorisé — cette exception ne void pas Misericordiable.</li>
+          <li><strong>QP "Ginger en difficulté" :</strong> <em>Mentir aux charbonniers</em> (dire que vous avez déjà tué les bandits). Mentir aussi à Ginger ensuite. Vous perdez Rousselet dans ce run, mais conservez Misericordiable.</li>
+          <li><strong>QP "Le baptême du feu" :</strong> Rester en retrait. Laisser <strong>Robard et Radzig</strong> tuer tous les ennemis. Ils sont invincibles et ne peuvent pas échouer.</li>
+          <li><strong>QP "Tout ce qui brille" :</strong> Ne pas tuer le chevalier mystérieux ni <strong>Jezhek de Rowna</strong> à la fin de la quête.</li>
+          <li><strong>QP "Une aiguille dans une botte de foin" :</strong> <strong>Arrêter Pie</strong> plutôt que le tuer (option de dialogue disponible).</li>
+          <li><strong>QP "Un serment est un serment" :</strong> Conquérir le château uniquement à poings nus. Laisser vos alliés gérer les ennemis.</li>
+          <li><strong>Tous les combats :</strong> Sneak attacks pour K.O. les ennemis, poings nus ensuite. L'Éloquence élevée permet d'éviter de nombreuses confrontations.</li>
+        </ul>
+        <div class="callout c-tip"><strong>Astuce :</strong> Fabriquez ou achetez des potions d'Éloquence avant les dialogues difficiles. Portez des vêtements propres et en bon état pour de meilleurs scores d'Impression.</div>
+      </div></div>
+    </div>
+
+    <!-- PUCELET -->
+    <div class="trophy-card" id="card-pucelet">
+      <div class="trophy-hd" data-card="pucelet">
+        <div class="t-bar argent"></div><div class="t-dot-wrap"><div class="t-dot argent"></div></div>
+        <div class="t-titles">
+          <div class="t-name">Pucelet <span class="badge b-red">⚠ Phase 3 — Argent</span></div>
+          <div class="t-sub">Rester célibataire et terminer le jeu vierge</div>
+        </div>
+        <div class="t-type argent">Argent</div>
+        <div class="t-check-btn" data-done="pucelet"><div class="t-check" id="cc-pucelet">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <div class="callout c-tip"><strong>Le plus simple de la Phase 3.</strong> Il suffit d'éviter trois situations précises tout au long de la partie.</div>
+        <ul class="steps">
+          <li>Ne pas faire la quête <strong>"Un brin de cour"</strong> avec Thérèse (ou l'abandonner avant la fin si elle se déclenche).</li>
+          <li>Ne pas faire la quête <strong>"À votre service, ma Dame"</strong> avec Dame Thifaine (ou l'abandonner avant la scène finale).</li>
+          <li>Ne pas commander <strong>"le service complet"</strong> dans les bains publics.</li>
+          <li>Lors de la QP <strong>"Les voies mystérieuses"</strong> : <strong>ne pas boire avec le Père Godwin</strong> à la taverne. Choisir l'autre option de dialogue ou ne pas se présenter à la taverne.</li>
+        </ul>
+      </div></div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // ── MENU MOBILE ──
+  function toggleMenu() {
+    const s = document.getElementById('sidebar');
+    const o = document.getElementById('menu-overlay');
+    const open = s.classList.toggle('open');
+    o.classList.toggle('open', open);
+    document.getElementById('menu-toggle').textContent = open ? '✕' : '⚜';
+  }
+  function closeMenu() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('menu-overlay').classList.remove('open');
+    document.getElementById('menu-toggle').textContent = '⚜';
+  }
+
+  // ── ÉTAT ──
+  const trophyIds = ['ardeor','galois','garconier','escoupeur','roi-pamphile','sedulier','rousselet','peccator','fisicien','talmbergeois','enquereor','traitel','misericordiable','pucelet'];
+  const state = JSON.parse(localStorage.getItem('kcd3_progress') || '{}');
+
+  function save() { localStorage.setItem('kcd3_progress', JSON.stringify(state)); }
+
+  function toggleCard(id) { document.getElementById('card-'+id).classList.toggle('open'); }
+
+  function toggleDone(id) {
+    const k = 't_'+id; state[k] = !state[k]; save();
+    const done = state[k];
+    const card = document.getElementById('card-'+id);
+    const na   = document.getElementById('na-'+id);
+    const nc   = document.getElementById('nc-'+id);
+    if (card) card.classList.toggle('done', done);
+    if (na)   na.classList.toggle('done', done);
+    if (nc)   nc.textContent = done ? '✓' : '';
+    updateProgress();
+  }
+
+  function toggleCL(id) {
+    state[id] = !state[id]; save();
+    const n   = id.replace('cl','');
+    const row = document.querySelector('tr[data-id="'+id+'"]');
+    const box = document.getElementById('cl-check-'+n);
+    const done = state[id];
+    if (row) row.classList.toggle('done', done);
+    if (box) box.textContent = done ? '✓' : '';
+  }
+
+  function updateProgress() {
+    const done = trophyIds.filter(id => state['t_'+id]).length;
+    document.getElementById('prog-count').textContent = done + ' / ' + trophyIds.length;
+    document.getElementById('prog-fill').style.width = (done / trophyIds.length * 100) + '%';
+  }
+
+  function resetAll() {
+    if (!confirm('Réinitialiser toute la progression ?')) return;
+    Object.keys(state).forEach(k => delete state[k]); save();
+    trophyIds.forEach(id => {
+      const card = document.getElementById('card-'+id);
+      const na   = document.getElementById('na-'+id);
+      const nc   = document.getElementById('nc-'+id);
+      if (card) card.classList.remove('done');
+      if (na)   na.classList.remove('done');
+      if (nc)   nc.textContent = '';
+    });
+    document.querySelectorAll('tr.cl-row').forEach(row => {
+      row.classList.remove('done');
+      const n = (row.dataset.id||'').replace('cl','');
+      const box = document.getElementById('cl-check-'+n);
+      if (box) box.textContent = '';
+    });
+    updateProgress();
+  }
+
+  window.addEventListener('DOMContentLoaded', function() {
+    // Restaurer état trophées
+    trophyIds.forEach(id => {
+      if (!state['t_'+id]) return;
+      const card = document.getElementById('card-'+id);
+      const na   = document.getElementById('na-'+id);
+      const nc   = document.getElementById('nc-'+id);
+      if (card) card.classList.add('done');
+      if (na)   na.classList.add('done');
+      if (nc)   nc.textContent = '✓';
+    });
+    // Restaurer état checklist
+    document.querySelectorAll('tr.cl-row').forEach(row => {
+      const id = row.dataset.id;
+      if (!id || !state[id]) return;
+      row.classList.add('done');
+      const n = id.replace('cl','');
+      const box = document.getElementById('cl-check-'+n);
+      if (box) box.textContent = '✓';
+    });
+    updateProgress();
+
+    // Clics fiches
+    document.querySelectorAll('[data-card]').forEach(function(hd) {
+      hd.addEventListener('click', function() { toggleCard(hd.dataset.card); });
+    });
+    // Clics boutons cocher
+    document.querySelectorAll('[data-done]').forEach(function(btn) {
+      btn.addEventListener('click', function(e) { e.stopPropagation(); toggleDone(btn.dataset.done); });
+    });
+    // Clics checklist
+    document.querySelectorAll('tr.cl-row').forEach(function(row) {
+      if (!row.dataset.id) return;
+      row.addEventListener('click', function() { toggleCL(row.dataset.id); });
+    });
+    // Fermer menu mobile après clic nav
+    document.querySelectorAll('#snav a').forEach(function(a) {
+      a.addEventListener('click', function() { if (window.innerWidth <= 680) closeMenu(); });
+    });
+    // Highlight nav au scroll
+    const io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        const link = document.querySelector('#snav a[href="#'+e.target.id+'"]');
+        if (link) link.classList.toggle('active', e.isIntersecting);
+      });
+    }, { rootMargin: '-5% 0px -85% 0px', threshold: 0 });
+    document.querySelectorAll('#snav a[href^="#"]').forEach(function(a) {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) io.observe(t);
+    });
+  });
+</script>
+</body>
+</html>

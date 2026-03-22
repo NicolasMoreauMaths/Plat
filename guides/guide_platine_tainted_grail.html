@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tainted Grail — Guide Platine</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:         #f7f3ec;
+    --bg2:        #f0ebe0;
+    --bg3:        #e8e0d0;
+    --bg4:        #ddd4bf;
+    --sidebar-bg: #2a1f0e;
+    --sidebar-bg2:#362912;
+    --border:     #d4c9b0;
+    --border-dark:#bfb09a;
+    --gold:       #9a6f1a;
+    --gold-light: #c9992a;
+    --gold-pale:  #f5edda;
+    --gold-mid:   #e8d5a0;
+    --red:        #9b2c1a;
+    --red-bg:     #fdf1ee;
+    --red-border: #d4856e;
+    --orange:     #9b530a;
+    --orange-bg:  #fdf5ec;
+    --orange-border:#d4a56e;
+    --green:      #2d6e3e;
+    --green-bg:   #eef6f1;
+    --green-border:#7aba8e;
+    --blue:       #1a5080;
+    --blue-bg:    #eef3f9;
+    --blue-border:#7aadce;
+    --text:       #2a1f0e;
+    --text-mid:   #5a4a30;
+    --text-dim:   #8a7a60;
+    --text-faint: #bfb09a;
+    --bronze-dot: #9a6030;
+    --silver-dot: #6a7a8a;
+    --or-dot:     #9a6f1a;
+    --nav-w: 270px;
+    --radius: 8px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.75;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ─── SIDEBAR ─── */
+  #sidebar {
+    width: var(--nav-w);
+    height: 100vh;
+    background: var(--sidebar-bg);
+    position: fixed;
+    top: 0; left: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #sidebar-header {
+    padding: 28px 22px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .s-eyebrow {
+    font-family: 'Outfit', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  #sidebar-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #f5edd8;
+    line-height: 1.25;
+  }
+
+  .progress-wrap {
+    padding: 18px 22px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .progress-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .progress-label strong { color: var(--gold-light); font-weight: 600; }
+
+  .progress-track {
+    height: 3px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #7a5010, var(--gold-light));
+    border-radius: 2px;
+    transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  }
+
+  nav { padding: 10px 0 0; flex: 1; }
+
+  .nav-group {
+    padding: 14px 22px 4px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+  }
+
+  nav a {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 22px;
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12.5px;
+    font-weight: 400;
+    transition: all 0.18s;
+    border-left: 2px solid transparent;
+    line-height: 1.4;
+  }
+
+  nav a:hover { color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.04); border-left-color: rgba(201,153,42,0.4); }
+  nav a.active { color: var(--gold-light); background: rgba(201,153,42,0.08); border-left-color: var(--gold-light); font-weight: 500; }
+  nav a.done { color: rgba(255,255,255,0.22); text-decoration: line-through; text-decoration-color: rgba(255,255,255,0.12); }
+  nav a.done .nc { background: rgba(50,160,80,0.22); border-color: rgba(50,160,80,0.45); }
+
+  .nc {
+    width: 13px; height: 13px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 2px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px;
+    color: #5cd07a;
+    font-weight: 700;
+    transition: all 0.18s;
+  }
+
+  .m-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: #d4604a;
+    flex-shrink: 0;
+    margin-left: auto;
+    box-shadow: 0 0 5px rgba(212,96,74,0.5);
+  }
+
+  .reset-btn {
+    margin: 14px 22px 22px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.25);
+    padding: 8px 14px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.18s;
+    width: calc(100% - 44px);
+  }
+  .reset-btn:hover { border-color: #d4604a; color: #d4604a; }
+
+  /* ─── MAIN ─── */
+  #main {
+    margin-left: var(--nav-w);
+    flex: 1;
+    max-width: 830px;
+    padding: 52px 60px 140px;
+  }
+
+  /* ─── HERO ─── */
+  #hero { margin-bottom: 64px; padding-bottom: 52px; border-bottom: 1px solid var(--border); }
+
+  .eyebrow {
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  #hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.05;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+  }
+
+  #hero h1 em { font-style: italic; color: var(--gold); }
+
+  .subtitle {
+    font-size: 15px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    color: var(--text-dim);
+    margin-bottom: 32px;
+    letter-spacing: 0.2px;
+  }
+
+  .hero-stats { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .stat { background: var(--bg2); border: 1px solid var(--border); padding: 12px 20px; border-radius: var(--radius); }
+
+  .stat-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .stat-val.red { color: var(--red); }
+
+  .stat-lbl {
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  /* ─── SECTIONS ─── */
+  .section { margin-bottom: 72px; scroll-margin-top: 24px; }
+
+  .section-hd { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+    letter-spacing: -0.2px;
+  }
+
+  .section-rule { flex: 1; height: 1px; background: var(--border); }
+
+  /* ─── CHECKLIST ─── */
+  .cl-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+
+  .cl-table th {
+    font-family: 'Outfit', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    padding: 8px 14px;
+    text-align: left;
+    border-bottom: 2px solid var(--border);
+    font-weight: 600;
+  }
+
+  .cl-row { border-bottom: 1px solid var(--bg3); cursor: pointer; transition: background 0.13s; }
+  .cl-row:hover { background: var(--bg2); }
+  .cl-row.done { opacity: 0.38; }
+  .cl-row.crit td:nth-child(2) { border-left: 3px solid var(--red-border); padding-left: 11px; }
+  .cl-row td { padding: 10px 14px; vertical-align: top; }
+
+  .cl-box {
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--border-dark);
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+    margin-top: 1px;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .cl-row.done .cl-box { background: var(--green-bg); border-color: var(--green-border); }
+
+  .cl-when {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11.5px;
+    font-weight: 400;
+    color: var(--text-dim);
+    white-space: nowrap;
+    padding-top: 11px !important;
+  }
+
+  .cl-text { font-size: 15px; color: var(--text-mid); line-height: 1.55; }
+  .cl-text strong { color: var(--text); font-weight: 600; }
+
+  .badge-m {
+    display: inline-block;
+    background: var(--red-bg);
+    color: var(--red);
+    border: 1px solid var(--red-border);
+    font-size: 9px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-left: 6px;
+    vertical-align: middle;
+    text-transform: uppercase;
+  }
+
+  .act-divider td {
+    padding: 16px 14px 4px !important;
+    font-family: 'Outfit', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--bg3);
+    font-weight: 600;
+  }
+
+  /* ─── TROPHY CARDS ─── */
+  .trophy-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    overflow: hidden;
+    scroll-margin-top: 24px;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  .trophy-card:hover { box-shadow: 0 2px 16px rgba(42,31,14,0.07); }
+  .trophy-card.done { opacity: 0.4; }
+
+  .trophy-hd {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    background: #fff;
+    transition: background 0.13s;
+  }
+  .trophy-hd:hover { background: var(--bg); }
+
+  .t-bar { width: 4px; align-self: stretch; flex-shrink: 0; }
+  .t-bar.or     { background: var(--or-dot); }
+  .t-bar.argent { background: var(--silver-dot); }
+  .t-bar.bronze { background: var(--bronze-dot); }
+
+  .t-dot-wrap { padding: 14px 14px 14px 16px; flex-shrink: 0; }
+  .t-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .t-dot.or     { background: var(--or-dot); box-shadow: 0 0 8px rgba(154,111,26,0.3); }
+  .t-dot.argent { background: var(--silver-dot); }
+  .t-dot.bronze { background: var(--bronze-dot); }
+
+  .t-titles { flex: 1; padding: 14px 0; }
+
+  .t-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    font-family: 'Outfit', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+  .b-red    { background: var(--red-bg);    color: var(--red);    border: 1px solid var(--red-border); }
+  .b-orange { background: var(--orange-bg); color: var(--orange); border: 1px solid var(--orange-border); }
+  .b-green  { background: var(--green-bg);  color: var(--green);  border: 1px solid var(--green-border); }
+  .b-gold   { background: var(--gold-pale); color: var(--gold);   border: 1px solid var(--gold-mid); }
+
+  .t-sub {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-dim);
+    margin-top: 2px;
+    letter-spacing: 0.2px;
+  }
+
+  .t-type {
+    padding: 14px 16px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    text-transform: uppercase;
+  }
+  .t-type.or     { color: var(--or-dot); }
+  .t-type.argent { color: var(--silver-dot); }
+  .t-type.bronze { color: var(--bronze-dot); }
+
+  .t-check-btn { padding: 14px 12px; flex-shrink: 0; }
+
+  .t-check {
+    width: 26px; height: 26px;
+    border: 1.5px solid var(--border-dark);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--green);
+    transition: all 0.2s;
+    cursor: pointer;
+    background: transparent;
+  }
+  .done .t-check { background: var(--green-bg); border-color: var(--green-border); }
+
+  .t-chevron {
+    padding: 14px 16px 14px 4px;
+    color: var(--text-faint);
+    font-size: 10px;
+    font-family: 'Outfit', sans-serif;
+    transition: transform 0.25s cubic-bezier(.4,0,.2,1);
+  }
+  .trophy-card.open .t-chevron { transform: rotate(180deg); }
+
+  .trophy-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(.4,0,.2,1);
+    border-top: 0px solid var(--border);
+  }
+  .trophy-card.open .trophy-body { max-height: 3000px; border-top-width: 1px; }
+
+  .tbi { padding: 28px 32px 32px; }
+
+  /* ─── BODY CONTENT ─── */
+  .tbi h4 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 28px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--gold-mid);
+  }
+  .tbi h4:first-child { margin-top: 0; }
+
+  .tbi p { font-size: 17px; color: var(--text-mid); margin-bottom: 12px; line-height: 1.7; }
+  .tbi strong { color: var(--text); font-weight: 600; }
+  .tbi em { font-style: italic; color: var(--text-mid); }
+
+  .steps {
+    list-style: none;
+    margin: 8px 0 16px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .steps li {
+    padding: 10px 16px 10px 36px;
+    position: relative;
+    color: var(--text-mid);
+    font-size: 16px;
+    line-height: 1.6;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .steps li:last-child { border-bottom: none; }
+  .steps li:nth-child(even) { background: #fff; }
+  .steps li::before { content: '→'; position: absolute; left: 14px; color: var(--gold); font-size: 14px; }
+  .steps li strong { color: var(--text); font-weight: 600; }
+
+  .dialogue {
+    background: var(--gold-pale);
+    border: 1px solid var(--gold-mid);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    padding: 14px 18px;
+    margin: 12px 0;
+  }
+  .d-lbl {
+    font-family: 'Outfit', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .dialogue ul { list-style: none; }
+  .dialogue ul li {
+    padding: 4px 0 4px 18px;
+    position: relative;
+    font-style: italic;
+    color: var(--text-mid);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .dialogue ul li::before { content: '«'; position: absolute; left: 0; color: var(--gold); font-style: normal; }
+
+  .callout {
+    border-radius: 6px;
+    padding: 13px 16px;
+    margin: 14px 0;
+    font-size: 15px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    border-left: 3px solid;
+  }
+  .c-danger { background: var(--red-bg);    border-color: var(--red-border);    color: var(--red); }
+  .c-warn   { background: var(--orange-bg); border-color: var(--orange-border); color: var(--orange); }
+  .c-tip    { background: var(--green-bg);  border-color: var(--green-border);  color: var(--green); }
+  .c-info   { background: var(--blue-bg);   border-color: var(--blue-border);   color: var(--blue); }
+  .callout strong { font-weight: 600; }
+
+  .tribe-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+
+  .tribe-block {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+  .tribe-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--gold-mid);
+  }
+  .tribe-block p { font-size: 14px; color: var(--text-mid); margin-bottom: 6px; font-family: 'Outfit', sans-serif; line-height: 1.55; }
+  .tribe-block strong { color: var(--text); font-weight: 600; }
+  .tribe-block em { font-style: italic; color: var(--text-dim); }
+
+  /* ─── SCROLLBAR ─── */
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-track { background: transparent; }
+  #sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg2); }
+  ::-webkit-scrollbar-thumb { background: var(--border-dark); border-radius: 3px; }
+
+  @media (max-width: 900px) {
+    :root { --nav-w: 230px; }
+    #main { padding: 32px 28px 80px; }
+    .tribe-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 680px) {
+    :root { --nav-w: 0px; }
+
+    body { font-size: 16px; display: block; }
+
+    #sidebar {
+      width: 100%; height: auto; max-height: 75vh;
+      position: fixed; top: auto; bottom: 0; left: 0; right: 0;
+      border-right: none; border-top: 2px solid var(--sidebar-bg);
+      transform: translateY(100%);
+      transition: transform .3s cubic-bezier(.4,0,.2,1);
+      z-index: 200;
+      flex-direction: column;
+    }
+    #sidebar.open { transform: translateY(0); }
+
+    #menu-toggle {
+      display: flex; align-items: center; justify-content: center;
+      position: fixed; bottom: 20px; right: 20px;
+      width: 52px; height: 52px;
+      background: var(--sidebar-bg);
+      border: 2px solid rgba(201,153,42,0.5);
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 300;
+      box-shadow: 0 4px 16px rgba(0,0,0,.3);
+      transition: transform .2s;
+      color: var(--gold-light);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+    }
+    #menu-toggle:active { transform: scale(.93); }
+
+    #menu-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.5);
+      z-index: 190;
+    }
+    #menu-overlay.open { display: block; }
+
+    #main {
+      margin-left: 0;
+      padding: 28px 16px 100px;
+      max-width: 100%;
+    }
+
+    #hero h1 { font-size: 26px; }
+    #hero::before, #hero::after { letter-spacing: 4px; }
+    .subtitle { font-size: 13px; }
+    .hero-stats { gap: 8px; }
+    .stat { padding: 9px 14px; }
+    .stat-val { font-size: 18px; }
+
+    .section-title { font-size: 18px; }
+
+    /* Checklist — masquer la colonne "Quand" */
+    .cl-when { display: none; }
+    .cl-table th:nth-child(2) { display: none; }
+    .cl-row td:nth-child(2) { display: none; }
+    .cl-row td { padding: 8px 10px; }
+    .cl-text { font-size: 13.5px; }
+    .act-divider td { font-size: 7.5px; }
+
+    /* Trophées */
+    .t-name { font-size: 13px; }
+    .t-sub { font-size: 10px; }
+    .t-type { display: none; }
+    .tbi { padding: 16px 16px 20px; }
+    .tbi p { font-size: 15px; }
+    .steps li { font-size: 14.5px; padding-left: 28px; }
+    .tribe-grid { grid-template-columns: 1fr; }
+
+    .section-hd { margin-bottom: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="menu-overlay" onclick="closeMenu()"></div>
+<button id="menu-toggle" onclick="toggleMenu()" aria-label="Menu">☰</button>
+
+<aside id="sidebar">
+  <div id="sidebar-header">
+    <div class="s-eyebrow">Guide Trophées Manquables</div>
+    <h2>Tainted Grail<br>The Fall of Avalon</h2>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label">Progression <strong id="prog-count">0 / 12</strong></div>
+    <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+  </div>
+  <nav id="snav">
+    <div class="nav-group">Vue d'ensemble</div>
+    <a href="#checklist"><span class="nc" id="nc-checklist"></span>Checklist rapide</a>
+
+    <div class="nav-group">Prologue</div>
+    <a href="#card-forgeloss" id="na-forgeloss"><span class="nc" id="nc-forgeloss"></span>Forge dans la Perte</a>
+    <a href="#card-nochains" id="na-nochains"><span class="nc" id="nc-nochains"></span>Pas d'Enchainements…<span class="m-dot"></span></a>
+
+    <div class="nav-group">Acte 1</div>
+    <a href="#card-doubleid" id="na-doubleid"><span class="nc" id="nc-doubleid"></span>Double Identité<span class="m-dot"></span></a>
+    <a href="#card-gates" id="na-gates"><span class="nc" id="nc-gates"></span>Les Portes sont Superflues</a>
+    <a href="#card-muriel" id="na-muriel"><span class="nc" id="nc-muriel"></span>Le Gloussement de l'Oracle<span class="m-dot"></span></a>
+    <a href="#card-forever" id="na-forever"><span class="nc" id="nc-forever"></span>Pour Toujours</a>
+    <a href="#card-crows" id="na-crows"><span class="nc" id="nc-crows"></span>Le Destin des Corbeaux<span class="m-dot"></span></a>
+    <a href="#card-stone" id="na-stone"><span class="nc" id="nc-stone"></span>La Sentinelle de Pierre</a>
+    <a href="#card-excalibur" id="na-excalibur"><span class="nc" id="nc-excalibur"></span>Excalibur en Solitaire</a>
+
+    <div class="nav-group">Acte 2</div>
+    <a href="#card-mushking" id="na-mushking"><span class="nc" id="nc-mushking"></span>Le Roi Spore</a>
+    <a href="#card-spark" id="na-spark"><span class="nc" id="nc-spark"></span>L'Étincelle de la Création</a>
+
+    <div class="nav-group">Acte 3</div>
+    <a href="#card-axe" id="na-axe"><span class="nc" id="nc-axe"></span>Et Ma Hache ! ★<span class="m-dot"></span></a>
+  </nav>
+  <button class="reset-btn" onclick="resetAll()">↺ Réinitialiser la progression</button>
+</aside>
+
+<main id="main">
+
+  <section id="hero">
+    <div class="eyebrow">Guide Platine PS5 — Trophées Manquables</div>
+    <h1>Tainted Grail<br><em>The Fall of Avalon</em></h1>
+    <p class="subtitle">Indications chronologiques précises · Dialogues exacts · Fenêtres de trophées</p>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-val">12</span><span class="stat-lbl">Trophées couverts</span></div>
+      <div class="stat"><span class="stat-val">3</span><span class="stat-lbl">Actes</span></div>
+      <div class="stat"><span class="stat-val red">7</span><span class="stat-lbl">Critiques ⚠</span></div>
+    </div>
+  </section>
+
+  <!-- CHECKLIST -->
+  <section class="section" id="checklist">
+    <div class="section-hd"><h2 class="section-title">Checklist Chronologique</h2><div class="section-rule"></div></div>
+    <table class="cl-table">
+      <thead><tr><th style="width:28px"></th><th style="width:150px">Quand</th><th>Action requise</th></tr></thead>
+      <tbody>
+        <tr class="act-divider"><td colspan="3">Prologue — Île-Asile</td></tr>
+        <tr class="cl-row" data-id="cl1"><td><div class="cl-box" id="cl-check-1"></div></td><td class="cl-when">Début du jeu</td><td class="cl-text">Sortez de votre cellule → tournez à <strong>gauche</strong> → salle avec garde mort → coffre → prendre la <strong>Lettre</strong>. <span class="badge-m">Forge dans la Perte</span></td></tr>
+        <tr class="cl-row crit" data-id="cl2"><td><div class="cl-box" id="cl-check-2"></div></td><td class="cl-when">Fin du prologue</td><td class="cl-text"><strong>Avant de monter dans le bateau</strong> : tuer Caradoc + prendre TOUTE son armure. <span class="badge-m">Pas d'Enchainements + Double Identité</span></td></tr>
+
+        <tr class="act-divider"><td colspan="3">Acte 1 — Cornes du Sud</td></tr>
+        <tr class="cl-row" data-id="cl3"><td><div class="cl-box" id="cl-check-3"></div></td><td class="cl-when">1ère arrivée</td><td class="cl-text">Entrer dans le village en <strong>nageant</strong> côté mer, puis parler à <strong>Fearghas</strong>. <span class="badge-m">Les Portes sont Superflues</span></td></tr>
+        <tr class="cl-row crit" data-id="cl4"><td><div class="cl-box" id="cl-check-4"></div></td><td class="cl-when">Dès l'arrivée</td><td class="cl-text">Parler à <strong>Jann Heber</strong> (médecin), obtenir et <strong>BOIRE la potion</strong>. Puis parler à Muriel dans le poulailler sur les remparts. <span class="badge-m">Le Gloussement — 1/3</span></td></tr>
+        <tr class="cl-row crit" data-id="cl5"><td><div class="cl-box" id="cl-check-5"></div></td><td class="cl-when">Avant le village</td><td class="cl-text">Équiper <strong>toute l'armure de Caradoc</strong>, puis lui parler près de l'<strong>Antre de la Bête</strong>. <span class="badge-m">Double Identité</span></td></tr>
+        <tr class="cl-row" data-id="cl6"><td><div class="cl-box" id="cl-check-6"></div></td><td class="cl-when">1ère visite taverne</td><td class="cl-text">Parler à <strong>Alisa</strong> en étant <strong>gentil</strong> dès le 1er contact. Compléter toutes ses quêtes. <span class="badge-m">Pour Toujours</span></td></tr>
+        <tr class="cl-row crit" data-id="cl7"><td><div class="cl-box" id="cl-check-7"></div></td><td class="cl-when">Quêtes de guilde</td><td class="cl-text">Libérer Vidar → à Roscree <strong>trahir Vidar</strong>, rejoindre les <strong>Enfants de Morrigan</strong>. Chaîne complète. <span class="badge-m">Le Destin des Corbeaux</span></td></tr>
+        <tr class="cl-row" data-id="cl8"><td><div class="cl-box" id="cl-check-8"></div></td><td class="cl-when">Quêtes de guilde</td><td class="cl-text">Rejoindre les <strong>Gardes-Pierre</strong> via Ughwe. Fabriquer Relique Brute, compléter la chaîne. <span class="badge-m">La Sentinelle de Pierre</span></td></tr>
+        <tr class="cl-row" data-id="cl9"><td><div class="cl-box" id="cl-check-9"></div></td><td class="cl-when">Quête Excalibur</td><td class="cl-text"><strong>Refuser toute aide</strong> tout au long de la quête Excalibur. <span class="badge-m">Excalibur en Solitaire</span></td></tr>
+
+        <tr class="act-divider"><td colspan="3">Acte 2 — Cuanacht</td></tr>
+        <tr class="cl-row crit" data-id="cl10"><td><div class="cl-box" id="cl-check-10"></div></td><td class="cl-when">Arrivée à Cuanacht</td><td class="cl-text">Trouver <strong>Muriel</strong> au niveau inférieur près de la porcherie. Épuiser ses dialogues. <span class="badge-m">Le Gloussement — 2/3</span></td></tr>
+        <tr class="cl-row" data-id="cl11"><td><div class="cl-box" id="cl-check-11"></div></td><td class="cl-when">Quête Trône des Profondeurs</td><td class="cl-text">Communiquer avec le mycélium → Spores Fongiques → les utiliser sur le <strong>Roi Sagremor</strong>. <span class="badge-m">Le Roi Spore</span></td></tr>
+
+        <tr class="act-divider"><td colspan="3">Acte 3 — Lames de la Mélancolie</td></tr>
+        <tr class="cl-row crit" data-id="cl12"><td><div class="cl-box" id="cl-check-12"></div></td><td class="cl-when">Village Theud</td><td class="cl-text">Trouver <strong>Muriel</strong> près du pont en ruines. L'encourager à voler → scène finale. <span class="badge-m">Le Gloussement — 3/3</span></td></tr>
+        <tr class="cl-row crit" data-id="cl13"><td><div class="cl-box" id="cl-check-13"></div></td><td class="cl-when">Quête principale — 4 tribus</td><td class="cl-text">Convaincre les <strong>4 tribus</strong> pour le Grand Conseil avec les bons dialogues. <span class="badge-m">Et Ma Hache !</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- FICHES -->
+  <section class="section" id="t-forgeloss">
+    <div class="section-hd"><h2 class="section-title">Fiches Détaillées</h2><div class="section-rule"></div></div>
+
+    <!-- FORGE DANS LA PERTE -->
+    <div class="trophy-card" id="card-forgeloss">
+      <div class="trophy-hd" data-card="forgeloss">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles"><div class="t-name">Forge dans la Perte <span class="badge b-orange">Prologue → Acte 2</span></div><div class="t-sub">Quête sur deux actes — lettre à remettre</div></div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="forgeloss"><div class="t-check" id="cc-forgeloss">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <h4>Étape 1 — Prologue : Récupérer la lettre</h4>
+        <p>Dès votre sortie de cellule, <strong>tournez à gauche</strong> dans le couloir. Avancez jusqu'à une pièce avec un garde mort devant l'entrée. À l'intérieur : un <strong>coffre contre le mur du fond</strong>. Prenez la lettre.</p>
+        <div class="callout c-info"><strong>Seconde chance :</strong> Si vous ratez la lettre ici, à Cuanacht parlez à <strong>Ignatius</strong> (patient de l'hôpital) — il vous donne la quête <em>Perinde Ac Cadaver</em> qui vous renvoie à l'Île-Asile.</div>
+        <h4>Étape 2 — Acte 2 : Remettre la lettre à Erfyr</h4>
+        <p>À Cuanacht, trouvez <strong>Erfyr le forgeron</strong> (zone artisanale). Il est alité à côté d'un autre forgeron malade lors de votre première visite.</p>
+        <ul class="steps">
+          <li><strong>Prérequis :</strong> Completez d'abord la quête d'Erfyr (récupérer le cœur de Beor).</li>
+          <li>Une fois sa quête terminée, l'option <strong>remettre la lettre</strong> devient disponible. Épuisez ses dialogues → trophée.</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- PAS D'ENCHAINEMENTS -->
+    <div class="trophy-card" id="card-nochains">
+      <div class="trophy-hd" data-card="nochains">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles"><div class="t-name">Pas d'Enchainements, Pas de Destin <span class="badge b-red">⚠ Critique</span></div><div class="t-sub">Fin du Prologue — lié à Double Identité</div></div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="nochains"><div class="t-check" id="cc-nochains">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <div class="callout c-danger"><strong>Ces deux trophées sont liés.</strong> Tuer Caradoc au Prologue et récupérer toute son armure est un prérequis absolu pour Double Identité en Acte 1.</div>
+        <h4>Tuer Caradoc — Fin du Prologue</h4>
+        <p>À la toute fin du prologue, <strong>avant de monter dans le bateau</strong>, Caradoc se trouve sur les docks. C'est le seul moment.</p>
+        <ul class="steps">
+          <li><strong>Astuce combat :</strong> Passez en mode Histoire. Attaquez avec le <strong>Sort de Braises Ardentes</strong> à bout portant → il change d'arme. Montez dans le bateau : il ne peut plus vous toucher. Spammez vos sorts à distance.</li>
+          <li>Après sa mort, <strong>ramassez TOUTES les pièces</strong> de son armure (casque, plastron, jambières, gantelets). Une seule pièce manquante = Double Identité inaccessible.</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- DOUBLE IDENTITE -->
+    <div class="trophy-card" id="card-doubleid">
+      <div class="trophy-hd" data-card="doubleid">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles"><div class="t-name">Double Identité <span class="badge b-red">⚠ Critique</span></div><div class="t-sub">Acte 1 — Cornes du Sud — nécessite l'armure du Prologue</div></div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="doubleid"><div class="t-check" id="cc-doubleid">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <p>Caradoc réapparaît vivant en Acte 1, près de l'entrée de <strong>l'Antre de la Bête</strong> (grotte sur la plage, côté est de la zone).</p>
+        <ul class="steps">
+          <li><strong>Avant d'approcher Caradoc</strong>, équipez <strong>toutes les pièces de son armure</strong> récupérées au prologue.</li>
+          <li>Engagez la conversation — le trophée se débloque pendant le dialogue.</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- LES PORTES -->
+    <div class="trophy-card" id="card-gates">
+      <div class="trophy-hd" data-card="gates">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles"><div class="t-name">Les Portes sont Superflues</div><div class="t-sub">Acte 1 — Cornes du Sud — à faire dès l'arrivée</div></div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="gates"><div class="t-check" id="cc-gates">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <p>Lorsque vous arrivez devant les Cornes du Sud, <strong>ne passez pas par la porte principale</strong>. Contournez par le côté mer et <strong>nagez</strong> jusqu'à entrer dans l'enceinte par l'eau.</p>
+        <ul class="steps"><li>Une fois à l'intérieur, parlez à <strong>Fearghas</strong> → trophée.</li></ul>
+        <div class="callout c-tip"><strong>Timing :</strong> C'est l'une des premières choses à faire en Acte 1. Ne commencez pas les quêtes du village avant.</div>
+      </div></div>
+    </div>
+
+    <!-- LE GLOUSSEMENT -->
+    <div class="trophy-card" id="card-muriel">
+      <div class="trophy-hd" data-card="muriel">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles"><div class="t-name">Le Gloussement de l'Oracle <span class="badge b-red">⚠ Le plus risqué</span></div><div class="t-sub">Acte 1 → Acte 2 → Acte 3 — une rencontre par région</div></div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="muriel"><div class="t-check" id="cc-muriel">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <div class="callout c-danger"><strong>Prérequis critique :</strong> Rater la potion de Jann Heber au début de l'Acte 1 rend ce trophée <strong>définitivement impossible</strong> sans recommencer la partie.</div>
+        <h4>Prérequis absolu — Potion de Jann Heber (Acte 1)</h4>
+        <p>Trouvez <strong>Jann Heber</strong>, le médecin des Cornes du Sud (maison près de votre stash). Enchaînez ces dialogues dans l'ordre :</p>
+        <div class="dialogue">
+          <div class="d-lbl">Dialogues requis — dans l'ordre</div>
+          <ul>
+            <li>Cette recette que vous murmuriiez…</li>
+            <li>L'essayer ? Sur vous-même ?</li>
+            <li>Vous pourriez l'essayer sur moi</li>
+            <li>Partir</li>
+          </ul>
+        </div>
+        <p>Vous recevez la potion. <strong>Buvez-la immédiatement</strong> depuis votre inventaire.</p>
+        <h4>Rencontre 1/3 — Acte 1, Cornes du Sud</h4>
+        <p>Muriel est la poule blanche dans le <strong>poulailler sur les remparts</strong>. Accès : montez par les <strong>échafaudages en bois</strong> sur le mur est. <strong>Épuisez absolument tous ses dialogues.</strong></p>
+        <h4>Rencontre 2/3 — Acte 2, Cuanacht</h4>
+        <p>Descendez au <strong>niveau inférieur de Cuanacht</strong>. Près de la <strong>porcherie</strong>, contre un mur en ruines. Épuisez tous ses dialogues.</p>
+        <h4>Rencontre 3/3 — Acte 3, Village Theud</h4>
+        <p>Village Theud, <strong>sud-ouest des Lames de la Mélancolie</strong>. Plateforme en bois <strong>près du pont en ruines</strong> (côté nord-ouest). Parlez plusieurs fois, puis <strong>encouragez-la à prendre son envol</strong> → scène → trophée.</p>
+      </div></div>
+    </div>
+
+    <!-- POUR TOUJOURS -->
+    <div class="trophy-card" id="card-forever">
+      <div class="trophy-hd" data-card="forever">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles"><div class="t-name">Pour Toujours <span class="badge b-orange">2 chemins possibles</span></div><div class="t-sub">Acte 1 (Alisa) ou Acte 2 (Beor) — un seul suffit</div></div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="forever"><div class="t-check" id="cc-forever">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <h4>Option A — Alisa (Acte 1) — recommandée</h4>
+        <p>Dans la <strong>taverne des Cornes du Sud</strong>, lors de votre <strong>toute première conversation</strong> avec Alisa, soyez <strong>gentil</strong>. Un seul dialogue impoli ferme définitivement cette voie.</p>
+        <ul class="steps">
+          <li>Complétez toutes ses quêtes en étant toujours bienveillant.</li>
+          <li>Une quête demande un <strong>Pourpoint de Noble en Lambeaux</strong> + des <strong>Gants de Soie Effilochés</strong> — dans un tas d'ordures <strong>en bas des escaliers</strong> du village.</li>
+        </ul>
+        <h4>Option B — Beor (Acte 2) — si Alisa est ratée</h4>
+        <p>À Cuanacht, aidez <strong>Beor le forgeron</strong>. Lors de la création d'un cœur de fer, choisissez d'<strong>infuser votre propre santé</strong> dans le cœur → perte de ~30 PV <strong>permanente</strong>.</p>
+      </div></div>
+    </div>
+
+    <!-- DESTIN DES CORBEAUX -->
+    <div class="trophy-card" id="card-crows">
+      <div class="trophy-hd" data-card="crows">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles"><div class="t-name">Le Destin des Corbeaux <span class="badge b-red">⚠ Trahir Vidar</span></div><div class="t-sub">Acte 1 → Acte 2 → Acte 3 — chaîne complète</div></div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="crows"><div class="t-check" id="cc-crows">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <div class="callout c-danger"><strong>Ne tuez pas Vidar</strong> lors de votre première rencontre. Ne massacrez pas le camp Dal Riata — cela bloquerait La Sentinelle de Pierre.</div>
+        <h4>Acte 1 — Libérer Vidar puis le trahir à Roscree</h4>
+        <p>Trouvez <strong>Vidar</strong> dans un camp de bandits au <strong>nord du Point de Voyage Rapide Broch en Ruines</strong>. Clé dans une caisse près de la tente. Libérez-le → retrouvez-le à <strong>Roscree</strong>.</p>
+        <div class="dialogue">
+          <div class="d-lbl">À Roscree — ne choisissez PAS "Je suis avec Vidar"</div>
+          <ul>
+            <li>Restez neutre jusqu'à ce que Self prenne la parole</li>
+            <li>Si il ne sera pas tué…</li>
+            <li>Confirmez votre adhésion aux Enfants de Morrigan</li>
+          </ul>
+        </div>
+        <h4>Suite de la chaîne — Missions</h4>
+        <ul class="steps">
+          <li><strong>Pas de Place pour les Errants :</strong> Récupérez le journal et rendez-le. Aucun choix requis.</li>
+          <li><strong>Les Tueurs de la Raison :</strong> Dites à Hrolf qu'il est désormais un informateur.</li>
+          <li><strong>L'Œuf du Coucou :</strong> Parlez à Abrin et <strong>choisissez de le tuer</strong>. Revenez pour la suite.</li>
+          <li><strong>Portez-lui la Tête :</strong> Récupérez la Tête de Morrigan et rendez-la.</li>
+          <li><strong>L'Enfant Prodigue :</strong> Enquêtez dans la Crypte de Famille, rapportez à Vin.</li>
+          <li><strong>Doux Rêves :</strong> Camp de Self ou de la Guerre — les deux fonctionnent.</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- SENTINELLE DE PIERRE -->
+    <div class="trophy-card" id="card-stone">
+      <div class="trophy-hd" data-card="stone">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles"><div class="t-name">La Sentinelle de Pierre</div><div class="t-sub">Acte 1 → Acte 2 → Acte 3 — chaîne complète</div></div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="stone"><div class="t-check" id="cc-stone">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <div class="callout c-warn"><strong>Attention :</strong> Si vous tuez tout le monde dans le camp Dal Riata, ou si vous soutenez Galahad, la chaîne devient inaccessible.</div>
+        <h4>Acte 1 — Rejoindre les Gardes-Pierre</h4>
+        <p>Achetez un <strong>Pic</strong> chez <strong>Orlaith</strong> (marchande, porte principale des Cornes du Sud). Trouvez <strong>Ughwe</strong> dans la zone rocheuse :</p>
+        <div class="dialogue">
+          <div class="d-lbl">Dialogues avec Ughwe — dans l'ordre</div>
+          <ul>
+            <li>Comment rejoindre les Gardes-Pierre ?</li>
+            <li>Tu es le maître, apprends-moi.</li>
+            <li>Laisse-moi au moins essayer.</li>
+          </ul>
+        </div>
+        <p>Fabriquez une <strong>Relique Brute</strong> à la Meule :</p>
+        <ul class="steps">
+          <li><strong>1 Wyrdstone :</strong> Minée avec le Pic à l'emplacement indiqué par Ughwe.</li>
+          <li><strong>5 Toiles Éthérées :</strong> Tuez des humains de jour → revenez la nuit au même endroit → tuez leurs Wyrdspawns.</li>
+        </ul>
+        <h4>Suite de la chaîne (Actes 2 et 3)</h4>
+        <ul class="steps">
+          <li><strong>Feu Éteint :</strong> Tuez les ennemis dans le Foyer des Gardes-Pierre → retournez voir Darv'hanr.</li>
+          <li><strong>Immortel et Divin :</strong> Entrez dans le Royaume Gelé et completez-le.</li>
+          <li><strong>Cicatrices Conquises :</strong> Décidez du sort des Prisonniers — les choix ne comptent pas.</li>
+        </ul>
+        <p>Fabriquez le <strong>Talisman des Gardes-Pierre</strong> : 3 Minerais de Météorite + 3 Wyrdstones + 25 Toiles Éthérées.</p>
+        <div class="callout c-tip"><strong>Astuce Toiles Éthérées :</strong> Marquez un camp de bandits. Tuez-les de jour, revenez la nuit au même endroit pour leurs Wyrdspawns. Très rapide avec un camp de 6-8 bandits.</div>
+      </div></div>
+    </div>
+
+    <!-- EXCALIBUR -->
+    <div class="trophy-card" id="card-excalibur">
+      <div class="trophy-hd" data-card="excalibur">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles"><div class="t-name">Excalibur en Solitaire</div><div class="t-sub">Acte 1 — quête principale Excalibur</div></div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="excalibur"><div class="t-check" id="cc-excalibur">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <p>Lors de la quête pour récupérer Excalibur, plusieurs PNJ proposent leur aide. <strong>Refusez toutes les offres</strong> tout au long de la quête.</p>
+        <div class="callout c-warn"><strong>À chaque étape</strong> où un personnage (Captain Breandan, One Eye, etc.) propose son aide, choisissez systématiquement l'équivalent de <em>« Je m'en charge seul »</em>. Le trophée se débloque quand vous posez la main sur Excalibur.</div>
+      </div></div>
+    </div>
+
+    <!-- ROI SPORE -->
+    <div class="trophy-card" id="card-mushking">
+      <div class="trophy-hd" data-card="mushking">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles"><div class="t-name">Le Roi Spore</div><div class="t-sub">Acte 2 — Quête Trône des Profondeurs</div></div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="mushking"><div class="t-check" id="cc-mushking">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <p>Durant la quête principale <strong>Trône des Profondeurs</strong>, explorez les souterrains de Cuanacht.</p>
+        <ul class="steps">
+          <li>Interagissez avec une structure fongique → <strong>communiquer avec le mycélium</strong> → obtenez des <strong>Spores Fongiques</strong>.</li>
+          <li>À la confrontation avec le <strong>Roi Sagremor</strong>, parlez-lui → option liée à l'<strong>Envoyé Fongique</strong> → utilisez les spores → trophée.</li>
+        </ul>
+        <div class="callout c-info"><strong>Timing :</strong> Ce trophée n'est manquable que si vous terminez Sagremor en combat pur sans utiliser les spores. La fenêtre est large pendant toute l'exploration.</div>
+      </div></div>
+    </div>
+
+    <!-- ETINCELLE -->
+    <div class="trophy-card" id="card-spark">
+      <div class="trophy-hd" data-card="spark">
+        <div class="t-bar bronze"></div><div class="t-dot-wrap"><div class="t-dot bronze"></div></div>
+        <div class="t-titles"><div class="t-name">L'Étincelle de la Création</div><div class="t-sub">Acte 1 → Acte 2 — Guilde d'Alchimie</div></div>
+        <div class="t-type bronze">Bronze</div>
+        <div class="t-check-btn" data-done="spark"><div class="t-check" id="cc-spark">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <p>Rejoignez la <strong>Guilde des Alchimistes</strong> en entrant dans le Den du Porteur de Brume en Acte 1. Complétez l'intégralité de la chaîne (s'étend jusqu'en Acte 2). Aucun choix spécifique requis.</p>
+      </div></div>
+    </div>
+
+    <!-- ET MA HACHE -->
+    <div class="trophy-card" id="card-axe">
+      <div class="trophy-hd" data-card="axe">
+        <div class="t-bar or"></div><div class="t-dot-wrap"><div class="t-dot or"></div></div>
+        <div class="t-titles"><div class="t-name">Et Ma Hache ! <span class="badge b-gold">Trophée Or</span> <span class="badge b-red">⚠ Critique</span></div><div class="t-sub">Acte 3 — Convaincre les 4 tribus pour le Grand Conseil</div></div>
+        <div class="t-type or">Or</div>
+        <div class="t-check-btn" data-done="axe"><div class="t-check" id="cc-axe">✓</div></div>
+        <div class="t-chevron">▼</div>
+      </div>
+      <div class="trophy-body"><div class="tbi">
+        <div class="callout c-danger"><strong>Trophée Or — le plus complexe du jeu.</strong> Sauvegardez manuellement avant chaque chef de tribu. Le trophée se débloque après la Couronne d'Arthur + retour chez Gerf'Hanr.</div>
+        <h4>Les 4 Tribus</h4>
+        <div class="tribe-grid">
+          <div class="tribe-block">
+            <div class="tribe-name">Tribu Sveinn</div>
+            <p>Parler à <strong>Barlaam</strong> → choisir de <strong>tuer le Père des Cerfs</strong>.</p>
+            <p>Dans l'Unrealm :<br><em>« Je suis venu mettre fin à ton règne sanglant… »</em><br><em>« Ils survivront sans toi. Affronte-moi. »</em></p>
+            <p>Retourner voir Barlaam après.</p>
+          </div>
+          <div class="tribe-block">
+            <div class="tribe-name">Tribu Theud</div>
+            <p>Compléter les 4 quêtes du Royaume du Rêve.</p>
+            <p>Dans la Chambre de la Mère :<br><em>« Je veux qu'Yngvi assiste au Grand Conseil. »</em><br><em>« Les Theud sont nécessaires dans le monde des éveillés. »</em></p>
+          </div>
+          <div class="tribe-block">
+            <div class="tribe-name">Tribu Ulfr</div>
+            <p>Compléter <em>Gravir la Montagne</em>, tuer <strong>Thrygve</strong>.</p>
+            <p>Désigner <strong>Stron'ner</strong> comme nouveau chef (pas Darv'hanr).</p>
+          </div>
+          <div class="tribe-block">
+            <div class="tribe-name">Tribu Volker</div>
+            <p>Compléter les 3 quêtes d'<strong>Angsvar</strong>.</p>
+            <p>Aucun choix spécifique requis.</p>
+          </div>
+        </div>
+        <h4>Finalisation</h4>
+        <p>4 tribus convaincues → récupérez la <strong>Couronne d'Arthur</strong> → retour chez <strong>Gerf'Hanr au Capital</strong> → Le Moot se tient → trophée.</p>
+        <div class="callout c-warn"><strong>Bug connu (Sveinn) :</strong> Ne frappez pas accidentellement Glyrna dans le Sanctuaire — elle peut devenir hostile et bloquer toute la quête.</div>
+      </div></div>
+    </div>
+
+  </section>
+</main>
+
+<script>
+  const trophyIds = ['forgeloss','nochains','doubleid','gates','muriel','forever','crows','stone','excalibur','mushking','spark','axe'];
+  const state = JSON.parse(localStorage.getItem('tg2_progress') || '{}');
+
+  function save() { localStorage.setItem('tg2_progress', JSON.stringify(state)); }
+
+  // ── TROPHÉES : ouvrir/fermer ──
+  function toggleCard(id) {
+    document.getElementById('card-'+id).classList.toggle('open');
+  }
+
+  // ── TROPHÉES : cocher ──
+  function toggleDone(id) {
+    const k = 't_'+id;
+    state[k] = !state[k];
+    save();
+    const card = document.getElementById('card-'+id);
+    const na   = document.getElementById('na-'+id);
+    const nc   = document.getElementById('nc-'+id);
+    const done = state[k];
+    if (card) card.classList.toggle('done', done);
+    if (na)   na.classList.toggle('done', done);
+    if (nc)   nc.textContent = done ? '✓' : '';
+    updateProgress();
+  }
+
+  // ── CHECKLIST ──
+  function toggleCL(id) {
+    state[id] = !state[id];
+    save();
+    const n   = id.replace('cl', '');
+    const row = document.querySelector('tr[data-id="' + id + '"]');
+    const box = document.getElementById('cl-check-' + n);
+    const done = state[id];
+    if (row) row.classList.toggle('done', done);
+    if (box) box.textContent = done ? '✓' : '';
+    updateProgress();
+  }
+
+  // ── PROGRESS ──
+  function updateProgress() {
+    const done = trophyIds.filter(id => state['t_'+id]).length;
+    document.getElementById('prog-count').textContent = done + ' / ' + trophyIds.length;
+    document.getElementById('prog-fill').style.width = (done / trophyIds.length * 100) + '%';
+  }
+
+  // ── RESET ──
+  function resetAll() {
+    if (!confirm('Réinitialiser toute la progression ?')) return;
+    Object.keys(state).forEach(k => delete state[k]);
+    save();
+    // Trophées
+    trophyIds.forEach(id => {
+      const card = document.getElementById('card-'+id);
+      const na   = document.getElementById('na-'+id);
+      const nc   = document.getElementById('nc-'+id);
+      if (card) card.classList.remove('done');
+      if (na)   na.classList.remove('done');
+      if (nc)   nc.textContent = '';
+    });
+    // Checklist
+    document.querySelectorAll('tr.cl-row').forEach(row => {
+      const id = row.dataset.id;
+      if (!id) return;
+      row.classList.remove('done');
+      const n = id.replace('cl', '');
+      const box = document.getElementById('cl-check-' + n);
+      if (box) box.textContent = '';
+    });
+    updateProgress();
+  }
+
+  function toggleMenu() {
+    const s = document.getElementById('sidebar');
+    const o = document.getElementById('menu-overlay');
+    const open = s.classList.toggle('open');
+    o.classList.toggle('open', open);
+    document.getElementById('menu-toggle').textContent = open ? '✕' : '☰';
+  }
+  function closeMenu() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('menu-overlay').classList.remove('open');
+    document.getElementById('menu-toggle').textContent = '☰';
+  }
+
+  // ── INIT ──
+  window.addEventListener('DOMContentLoaded', function() {
+
+    // Fermer le menu après clic sur un lien nav (mobile)
+    document.querySelectorAll('#snav a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        if (window.innerWidth <= 680) closeMenu();
+      });
+    });
+
+    // Restaurer état trophées
+    trophyIds.forEach(id => {
+      if (!state['t_'+id]) return;
+      const card = document.getElementById('card-'+id);
+      const na   = document.getElementById('na-'+id);
+      const nc   = document.getElementById('nc-'+id);
+      if (card) card.classList.add('done');
+      if (na)   na.classList.add('done');
+      if (nc)   nc.textContent = '✓';
+    });
+
+    // Restaurer état checklist
+    document.querySelectorAll('tr.cl-row').forEach(row => {
+      const id = row.dataset.id;
+      if (!id || !state[id]) return;
+      row.classList.add('done');
+      const n = id.replace('cl', '');
+      const box = document.getElementById('cl-check-' + n);
+      if (box) box.textContent = '✓';
+    });
+
+    updateProgress();
+
+    // Clics sur les en-têtes de fiches (ouvrir/fermer)
+    document.querySelectorAll('[data-card]').forEach(function(hd) {
+      hd.addEventListener('click', function() {
+        toggleCard(hd.dataset.card);
+      });
+    });
+
+    // Clics sur les boutons cocher trophée
+    document.querySelectorAll('[data-done]').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleDone(btn.dataset.done);
+      });
+    });
+
+    // Clics sur les lignes de checklist
+    document.querySelectorAll('tr.cl-row').forEach(function(row) {
+      if (!row.dataset.id) return;
+      row.addEventListener('click', function() {
+        toggleCL(row.dataset.id);
+      });
+    });
+
+    // Highlight menu au scroll
+    const io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        const link = document.querySelector('#snav a[href="#' + e.target.id + '"]');
+        if (link) link.classList.toggle('active', e.isIntersecting);
+      });
+    }, { rootMargin: '-5% 0px -85% 0px', threshold: 0 });
+
+    document.querySelectorAll('#snav a[href^="#"]').forEach(function(a) {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) io.observe(target);
+    });
+  });
+</script>
+</body>
+</html>
