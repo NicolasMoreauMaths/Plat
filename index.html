@@ -297,6 +297,53 @@
   .meta-pill.trophy { color: var(--gold2); border-color: rgba(240,192,96,0.25); }
   .meta-pill.diff   { color: var(--green); border-color: rgba(76,175,128,0.25); }
 
+  /* ── CARD PROGRESS ── */
+  .card-progress {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  .card-progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .card-progress-label span {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--dim);
+    letter-spacing: 0.3px;
+  }
+
+  .card-progress-label strong {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold2);
+  }
+
+  .card-progress-track {
+    height: 4px;
+    background: var(--bg3);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .card-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    border-radius: 4px;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 0;
+  }
+
+  .card-progress-fill.complete {
+    background: linear-gradient(90deg, var(--green), #7ade9a);
+  }
+
   .card-arrow {
     position: absolute;
     top: 14px;
@@ -526,6 +573,33 @@ function dismissInstall() {
   document.getElementById('install-banner').classList.remove('visible');
 }
 
+// ── PROGRESSION LOCALE ───────────────────────────────────────
+function getProgress(game) {
+  if (!game.storageKey || !game.trackedCount) return null;
+  try {
+    const state = JSON.parse(localStorage.getItem(game.storageKey) || '{}');
+    const done  = Object.keys(state).filter(k => k.startsWith('t_') && state[k] === true).length;
+    return { done, total: game.trackedCount };
+  } catch { return null; }
+}
+
+function progressHTML(p) {
+  if (!p) return '';
+  const pct      = p.total > 0 ? Math.round(p.done / p.total * 100) : 0;
+  const complete = p.done === p.total && p.total > 0;
+  const label    = complete ? '✓ Complété !' : `${p.done} / ${p.total} trophées validés`;
+  return `
+    <div class="card-progress">
+      <div class="card-progress-label">
+        <span>${label}</span>
+        <strong>${pct}%</strong>
+      </div>
+      <div class="card-progress-track">
+        <div class="card-progress-fill${complete ? ' complete' : ''}" style="width:${pct}%"></div>
+      </div>
+    </div>`;
+}
+
 // ── CHARGEMENT DES GUIDES ────────────────────────────────────
 async function loadGuides() {
   try {
@@ -545,7 +619,7 @@ async function loadGuides() {
 function renderGuides(games) {
   const list = document.getElementById('guides-list');
 
-  // Stats
+  // Stats globales
   const totalTrophies = games.reduce((a, g) => a + (g.trophies || 0), 0);
   document.getElementById('stat-guides').textContent   = games.length;
   document.getElementById('stat-trophies').textContent = totalTrophies;
@@ -560,7 +634,9 @@ function renderGuides(games) {
     return;
   }
 
-  list.innerHTML = games.map(game => `
+  list.innerHTML = games.map(game => {
+    const prog = getProgress(game);
+    return `
     <a class="guide-card" href="${game.file}">
       <div class="card-cover-wrap">
         ${game.cover
@@ -577,10 +653,11 @@ function renderGuides(games) {
           ${game.difficulty ? `<span class="meta-pill diff">⚡ ${game.difficulty}</span>` : ''}
           ${game.note ? `<span class="meta-pill">${game.note}</span>` : ''}
         </div>
+        ${progressHTML(prog)}
       </div>
       <div class="card-arrow">→</div>
-    </a>
-  `).join('');
+    </a>`;
+  }).join('');
 
   // Pré-mise en cache des guides listés
   if ('caches' in window) {

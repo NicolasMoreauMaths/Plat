@@ -4,11 +4,13 @@
     "title": "Tainted Grail",
     "subtitle": "The Fall of Avalon",
     "file": "guides/guide_platine_tainted_grail.html",
-    "cover": "https://cdn.cloudflare.steamstatic.com/steam/apps/1140680/library_600x900.jpg",
+    "cover": "https://cdn.cloudflare.steamstatic.com/steam/apps/1140680/header.jpg",
     "platform": "PS5",
     "trophies": 66,
     "difficulty": "6/10",
-    "color": "#1a1a2e"
+    "color": "#1a1a2e",
+    "storageKey": "tg2_progress",
+    "trackedCount": 12
   },
   {
     "id": "kingdom-come",
@@ -19,6 +21,8 @@
     "platform": "PS5",
     "trophies": 50,
     "difficulty": "5/10",
-    "color": "#2a1f0e"
+    "color": "#2a1f0e",
+    "storageKey": "kcd3_progress",
+    "trackedCount": 14
   }
 ]
