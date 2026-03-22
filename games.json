@@ -1,0 +1,24 @@
+[
+  {
+    "id": "tainted-grail",
+    "title": "Tainted Grail",
+    "subtitle": "The Fall of Avalon",
+    "file": "guides/guide_platine_tainted_grail.html",
+    "cover": "https://cdn2.steamgriddb.com/grid/3ef098b29007cc4bf1c57e3148b1db4ff228d142.jpg",
+    "platform": "PS5",
+    "trophies": 66,
+    "difficulty": "6/10",
+    "color": "#1a1a2e"
+  },
+  {
+    "id": "kingdom-come",
+    "title": "Kingdom Come",
+    "subtitle": "Deliverance",
+    "file": "guides/guide_platine_kingdom_come.html",
+    "cover": "https://cdn.cloudflare.steamstatic.com/steam/apps/1771300/header.jpg",
+    "platform": "PS5",
+    "trophies": 50,
+    "difficulty": "5/10",
+    "color": "#2a1f0e"
+  }
+]
