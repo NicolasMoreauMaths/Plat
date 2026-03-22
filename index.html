@@ -574,12 +574,22 @@ function dismissInstall() {
 }
 
 // ── PROGRESSION LOCALE ───────────────────────────────────────
+// Fallback hardcodé : fonctionne même si le games.json en cache
+// est une ancienne version sans storageKey/trackedCount.
+const PROGRESS_MAP = {
+  'tainted-grail': { storageKey: 'tg2_progress', trackedCount: 12 },
+  'kingdom-come':  { storageKey: 'kcd3_progress', trackedCount: 14 },
+};
+
 function getProgress(game) {
-  if (!game.storageKey || !game.trackedCount) return null;
+  const fb    = PROGRESS_MAP[game.id] || {};
+  const key   = game.storageKey   || fb.storageKey;
+  const total = game.trackedCount || fb.trackedCount;
+  if (!key || !total) return null;
   try {
-    const state = JSON.parse(localStorage.getItem(game.storageKey) || '{}');
+    const state = JSON.parse(localStorage.getItem(key) || '{}');
     const done  = Object.keys(state).filter(k => k.startsWith('t_') && state[k] === true).length;
-    return { done, total: game.trackedCount };
+    return { done, total };
   } catch { return null; }
 }
 

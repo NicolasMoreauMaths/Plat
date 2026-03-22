@@ -19,6 +19,7 @@ const APP_SHELL = [
   './icon-192.png',
   './icon-512.png',
   './games.json',
+  './images/tainted-grail.jpg',
 ];
 
 // ── INSTALL : précache du shell ─────────────────────────────
